@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gargi — Design de Produto &amp; Experiência</title>
+<meta name="description" content="Victor Gargi — Product Design &amp; Experience. Entregando produtos digitais de ponta-à-ponta.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=general-sans@400,500,700,800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="site-header__container">
+    <a href="/" class="logo">
+      <img src="assets/images/logo-header.png" alt="Gargi" width="76" height="36" onerror="this.style.opacity=0">
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#main" class="nav__link">Início</a>
+
+      <div class="nav__item nav__item--dropdown">
+        <button class="nav__button" aria-expanded="false" aria-controls="projects-menu">
+          Projetos <span class="nav__badge">3</span>
+        </button>
+        <div class="nav__dropdown" id="projects-menu">
+          <ul>
+            <li><a href="#volkswagen">Somapay PF</a></li>
+            <li><a href="#volkswagen">Crédito do Trabalhador</a></li>
+            <li><a href="#claro">Somapay PJ</a></li>
+            <li><a href="#peterson">Petco VetPoint</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="nav__item">
+        <a href="#curriculo" class="nav__link">Currículo</a>
+        <a href="assets/cv-victor-gargi.pdf" class="nav__icon-link" aria-label="Baixar currículo em PDF" download>
+          <svg class="icon icon--download" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <a href="#footer" class="nav__link">Contato</a>
+
+      <button class="lang-toggle" id="langToggle" type="button" aria-pressed="false" aria-label="Mudar idioma para inglês">
+        <span class="lang-toggle__label">EN-US</span>
+        <span class="lang-toggle__track"><span class="lang-toggle__thumb"></span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section-hero">
+    <div class="section-hero__bleed">
+      <div class="pattern-orange" aria-hidden="true"></div>
+    </div>
+    <svg class="curved-text" viewBox="0 0 387 390" aria-hidden="true">
+      <path id="curvedTextPath" d="M 193.5 0 A 193.5 195 0 0 0 0 195" fill="none"/>
+      <text>
+        <textPath href="#curvedTextPath" startOffset="0%">Design Systems&#160;&#160;&#160;&#160;Discovery&#160;&#160;&#160;&#160;Pesquisa&#160;&#160;&#160;&#160;Design+IA&#160;&#160;&#160;&#160;</textPath>
+      </text>
+    </svg>
+
+    <h1 class="hero-heading">
+      <span class="hero-heading__line1"><span class="tr1">Design</span> <span class="tr2"> </span><span class="tr3">de</span></span>
+      <span class="hero-heading__line2">Produto&#160;&#160;&#160;<span class="amp">&amp;</span></span>
+      <span class="hero-heading__line3">Experiência</span>
+    </h1>
+
+    <p class="hero-subtitle">Entregando produtos digitais de ponta-à-ponta.</p>
+  </section>
+
+  <section class="section-projects" aria-label="Projetos">
+
+    <article class="case-card case-card--volkswagen" id="volkswagen">
+      <div class="case-card__inner">
+        <div class="case-card__brand">
+          <p class="case-card__client">Volkswagen</p>
+          <div class="case-card__icon">
+            <img src="assets/images/icon-volkswagen.png" alt="Volkswagen" width="187" height="187" loading="lazy" onerror="this.style.opacity=0">
+          </div>
+        </div>
+        <div class="case-card__content">
+          <a href="#" class="case-card__view">ver<span class="plus">&#160;+</span></a>
+          <h3 class="case-card__heading">Transformando dados fragmentados em uma única experiência de comparação</h3>
+          <div class="case-card__tags">
+            <span class="tag tag--blue">4 pilares conectados</span>
+            <span class="tag tag--blue">Múltiplas fontes de dados</span>
+            <span class="tag tag--blue">+10 cenários de hipótese</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case-card case-card--claro" id="claro">
+      <div class="case-card__inner">
+        <div class="case-card__brand">
+          <p class="case-card__client">Claro Pay</p>
+          <div class="case-card__icon">
+            <img src="assets/images/icon-claro.png" alt="Claro Pay" width="187" height="187" loading="lazy" onerror="this.style.opacity=0">
+          </div>
+        </div>
+        <div class="case-card__content">
+          <a href="#" class="case-card__view">ver<span class="plus">&#160;+</span></a>
+          <h3 class="case-card__heading">Melhorando a experiência do usuário através de um novo onboarding</h3>
+          <div class="case-card__tags">
+            <span class="tag tag--red">40% menos tempo de conclusão</span>
+            <span class="tag tag--red">15+ cenários de exceção mapeados</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case-card case-card--peterson" id="peterson">
+      <div class="case-card__inner">
+        <div class="case-card__brand">
+          <p class="case-card__client">Peterson Solutions</p>
+          <div class="case-card__icon">
+            <img src="assets/images/icon-peterson.png" alt="Peterson Solutions" width="197" height="187" loading="lazy" onerror="this.style.opacity=0">
+          </div>
+        </div>
+        <div class="case-card__content">
+          <a href="#" class="case-card__view">ver<span class="plus">&#160;+</span></a>
+          <h3 class="case-card__heading">Como simplificar uma jornada B2B em um sistema legado de alta complexidade?</h3>
+          <div class="case-card__tags">
+            <span class="tag tag--navy">2.1 → 4.2 de satisfação</span>
+            <span class="tag tag--navy">62% menos cliques</span>
+            <span class="tag tag--navy">87 → 23 tickets de suporte por mês</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="section-resume" id="curriculo">
+    <div class="section-resume__container">
+      <div class="pattern-red" aria-hidden="true"></div>
+
+      <header class="resume-header">
+        <h2 class="resume-heading">Currículo</h2>
+        <div class="resume-daterange"><span>de 2019</span> <span class="dash">à</span> <span>2026</span></div>
+      </header>
+
+      <ol class="resume-list">
+        <li class="resume-item">
+          <div class="resume-item__who">
+            <h3>Volkswagen</h3>
+            <p class="resume-item__via">através da Opah IT</p>
+            <p class="resume-item__role">Senior Product Designer</p>
+          </div>
+          <p class="resume-item__desc">Investigo a rotina de gestores de frotas para transformar dados complexos de veículos em interfaces claras. Desenvolvo protótipos do wireframe à validação com usuários e contribuo com a evolução do design system, garantindo consistência entre plataformas.</p>
+          <p class="resume-item__date">Nov 2025 – Ago 2026</p>
+        </li>
+        <li class="resume-item">
+          <div class="resume-item__who">
+            <h3>Peterson Solutions</h3>
+            <p class="resume-item__via">através da Tropiko</p>
+            <p class="resume-item__role">Senior Product Designer</p>
+          </div>
+          <p class="resume-item__desc">Conduzi o discovery do sistema global de certificações antes de propor qualquer solução. Criei o primeiro design system da empresa com mais de 40 componentes e WCAG 2.1 AA. O redesign reduziu o fluxo principal em 62% e elevou a satisfação de 2.1 para 4.2.</p>
+          <p class="resume-item__date">Abr 2025 – Out 2025</p>
+        </li>
+        <li class="resume-item">
+          <div class="resume-item__who">
+            <h3>FAPESP</h3>
+            <p class="resume-item__via">através da Stefanini</p>
+            <p class="resume-item__role">Product Designer</p>
+          </div>
+          <p class="resume-item__desc">Realizei discovery com pesquisadores e administradores para entender fluxos complexos antes de desenhar as interfaces. Criei uma estrutura de requisitos que acelerou em 40% a aprovação com clientes e estabeleci padrões visuais que fortaleceram o design system.</p>
+          <p class="resume-item__date">Out 2024 – Abr 2025</p>
+        </li>
+        <li class="resume-item">
+          <div class="resume-item__who">
+            <h3>Fiserv</h3>
+            <p class="resume-item__via">através da Try Consultoria</p>
+            <p class="resume-item__role">Product Designer</p>
+          </div>
+          <p class="resume-item__desc">Conduzi benchmarking e análise de concorrência para embasar decisões de design em produtos de adquirência bancária. Criei fluxos e interfaces no Figma adaptando as entregas ao design system da Fiserv em colaboração com engenharia e CX.</p>
+          <p class="resume-item__date">Fev 2024 – Out 2024</p>
+        </li>
+      </ol>
+
+      <div class="resume-actions">
+        <a href="assets/cv-victor-gargi.pdf" class="pill-button" download>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download PDF
+        </a>
+        <a href="https://wa.me/5511967204035" class="pill-button" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 3.5A10.4 10.4 0 0012 0 10.5 10.5 0 001.6 14.8L0 21l6.4-1.6A10.5 10.5 0 0012 21a10.4 10.4 0 008.5-4.4A10.4 10.4 0 0022 12a10.4 10.4 0 00-1.5-8.5zM12 19a8 8 0 01-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1120 12a8 8 0 01-8 7zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8s-.4-.1-.6.1-.7.8-.9 1-.3.2-.6.1a6.6 6.6 0 01-1.9-1.2 7.2 7.2 0 01-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4a.5.5 0 000-.4c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 2.9 2.9 0 00-.9 2.2 5.1 5.1 0 001.1 2.7 11.6 11.6 0 004.5 4c.6.3 1.1.4 1.5.6a3.6 3.6 0 001.6.1 2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c-.1-.1-.2-.2-.4-.3z" fill="currentColor"/></svg>
+          Entre em contato
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="footer">
+  <div class="site-footer__container">
+    <a href="/" class="logo logo--footer">
+      <img src="assets/images/logo-footer.png" alt="Gargi" width="127" height="60" onerror="this.style.opacity=0">
+    </a>
+
+    <div class="footer-contact">
+      <button class="footer-contact__item" id="copyEmail" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>hello@gargidesign.com</span>
+      </button>
+      <a class="footer-contact__item" href="https://wa.me/5511967204035" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 3.5A10.4 10.4 0 0012 0 10.5 10.5 0 001.6 14.8L0 21l6.4-1.6A10.5 10.5 0 0012 21a10.4 10.4 0 008.5-4.4A10.4 10.4 0 0022 12a10.4 10.4 0 00-1.5-8.5zM12 19a8 8 0 01-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1120 12a8 8 0 01-8 7z" fill="currentColor"/></svg>
+        <span>+55 (11) 96720 4035</span>
+      </a>
+      <a class="footer-contact__item" href="https://linkedin.com/in/victorgargi" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7 10v7M7 7v.01M12 17v-4.5a2 2 0 014 0V17M12 10v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Victor Gargi</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
