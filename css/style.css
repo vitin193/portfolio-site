@@ -165,26 +165,64 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   padding: 40px var(--gutter);
   overflow: visible;
 }
-.section-hero__bleed {
-  position: absolute;
-  top: 173px;     /* PatternOrange, relative to section top (Figma: y=237 from page top, minus 64px header) */
-  left: 65.6%;    /* ~945px / 1440px, matches the original bleed-right position */
-  width: 645px;
-  height: 272.5px;
-  z-index: 0;
+
+.hero-heading {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+/* Line 1+2 "Design de / Produto &" — Figma: 194px / line-height 149px */
+.hero-heading__block1 {
+  font-size: clamp(48px, 13.5vw, 194px);
+  line-height: 0.9;   /* Figma: 149/194=0.768, mas a fonte substituta (General Sans) tem
+                          ascendente/descendente maiores que a Typo Grotesk original — 0.9
+                          evita colisão entre linhas. Reavaliar quando trocarmos a fonte real. */
+}
+.tr-design    { letter-spacing: -0.046em; }  /* -9px  @194px */
+.tr-gap       { letter-spacing: -0.093em; }  /* -18px @194px */
+.tr-de        { letter-spacing: -0.052em; }  /* -10px @194px */
+.tr-produto   { letter-spacing: -0.057em; }  /* -11px @194px */
+
+/* Line 3 "Experiência" — Figma: 231px / line-height 110px, distinctly bigger + tighter */
+.hero-heading__block2 {
+  font-size: clamp(57px, 16.1vw, 231px);
+  line-height: 0.65;   /* Figma: 110/231=0.476 — mesma ressalva de métrica da fonte acima */
+  letter-spacing: -0.048em; /* -11px @231px */
+  margin-top: 0.02em;
+}
+
+/* PatternOrange — a "tag" that circles the & (anchored to the & itself,
+   sized/offset in em so it tracks the glyph at any font-size/substitute font) */
+.amp-wrap {
+  position: relative;
+  display: inline-block;
+}
+.tr-amp {
+  position: relative;
+  z-index: 2;
+  letter-spacing: 0.026em; /* +5px @194px */
+  font-weight: 400;
 }
 .pattern-orange {
   position: absolute;
-  inset: 0;
+  left: -0.18em;
+  top: -0.22em;
+  width: 3.3em;
+  height: 0.85em;
   background: var(--orange-pattern);
-  border-radius: 40px;
+  border-radius: 0.2em;
+  z-index: 0;
 }
 .curved-text {
   position: absolute;
-  top: 77px;      /* Figma: y=77 relative to Section - Header */
-  left: 87.6%;    /* ~1262px / 1440px */
-  width: 387px;
-  height: 390px;
+  left: 1.35em;
+  top: -0.75em;
+  width: 2em;
+  height: 2.02em;
   overflow: visible;
   z-index: 1;
 }
@@ -196,22 +234,6 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   text-transform: uppercase;
   fill: var(--curve-red);
 }
-
-.hero-heading {
-  position: relative;
-  z-index: 1;
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: var(--ink);
-  font-size: clamp(64px, 9.7vw, 140px);
-  line-height: 0.95;
-  letter-spacing: -0.04em;
-  margin: 0 0 8px;
-}
-.hero-heading__line1,
-.hero-heading__line2,
-.hero-heading__line3 { display: block; }
-.hero-heading .amp { letter-spacing: 0.02em; font-weight: 400; }
 
 .hero-subtitle {
   position: relative;
