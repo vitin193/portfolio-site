@@ -1,10 +1,70 @@
 /* ===================================================================
    Gargi — Portfolio · Design tokens & base
    Fonte de verdade: Figma "gargiPortfolio2026" · frame "01 - Home"
-   Fontes: Satoshi (Fontshare, licença livre) no corpo/nav/tags;
-   General Sans (Fontshare) como substituta temporária de "Typo Grotesk"
-   nos títulos grandes, até confirmarmos a licença web da fonte original.
+
+   Fontes:
+   - Satoshi: hospedada localmente (assets/fonts) — licença confirmada
+     (Indian Type Foundry / Fontshare, uso comercial + web liberado).
+   - Typo Grotesk: AINDA NÃO embutida. Os arquivos que você mandou são
+     "_Demo" (uso pessoal/teste, sem direito de distribuição/web) e você
+     comentou que a licença completa ainda está em processo de compra.
+     Assim que a compra fechar e você mandar os arquivos definitivos,
+     troco os @font-face abaixo e é só isso — o resto do CSS já está
+     pronto pra receber a fonte real (tamanhos/tracking exatos do Figma
+     comentados ao lado de cada regra).
+   Até lá, uso "General Sans" (Fontshare, livre) como substituta visual
+   nos títulos grandes.
    =================================================================== */
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../assets/fonts/satoshi-regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../assets/fonts/satoshi-italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../assets/fonts/satoshi-light.woff2') format('woff2');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../assets/fonts/satoshi-medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../assets/fonts/satoshi-bold.woff2') format('woff2');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../assets/fonts/satoshi-black.woff2') format('woff2');
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+
+/* Quando a licença da Typo Grotesk estiver confirmada, descomente e aponte
+   pros arquivos definitivos (não-demo) em assets/fonts/:
+@font-face {
+  font-family: 'Typo Grotesk';
+  src: url('../assets/fonts/typo-grotesk-regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Typo Grotesk';
+  src: url('../assets/fonts/typo-grotesk-bold.woff2') format('woff2');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Typo Grotesk Black';
+  src: url('../assets/fonts/typo-grotesk-black.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+*/
 
 :root {
   /* cores */
