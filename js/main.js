@@ -1,12 +1,77 @@
 // Gargi — Portfolio · interações da Home (PT-BR)
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Alternância de idioma → navega para a versão em inglês
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Alternância de idioma → efeito de "press" antes de navegar para a versão em inglês
   const langToggle = document.getElementById('langToggle');
   if (langToggle) {
-    langToggle.addEventListener('click', () => {
-      window.location.href = '/en/';
+    langToggle.addEventListener('click', (e) => {
+      if (reduceMotion) return; // navega direto
+      e.preventDefault();
+      langToggle.setAttribute('aria-pressed', 'true');
+      const delay = 220;
+      setTimeout(() => { window.location.href = '/en/'; }, delay);
     });
+  }
+
+  // --- Entrada do Hero: fade/slide-in ao carregar ---
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.js-hero-in').forEach((el) => {
+      el.classList.add('is-in');
+    });
+  });
+
+  // --- Scroll-reveal (cards de projeto + itens do currículo) ---
+  const revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length) {
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute('data-reveal-index') || 0);
+            entry.target.style.setProperty('--reveal-index', idx);
+            entry.target.classList.add('is-in');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach((el) => revealObserver.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('is-in'));
+    }
+  }
+
+  // --- Contagem (anos do currículo) ---
+  const countEls = document.querySelectorAll('.count[data-count-to]');
+  if (countEls.length) {
+    const animateCount = (el) => {
+      const target = parseInt(el.getAttribute('data-count-to'), 10);
+      if (reduceMotion || Number.isNaN(target)) { el.textContent = target; return; }
+      const start = target - 6 > 0 ? target - 6 : 0;
+      const duration = 900;
+      const startTime = performance.now();
+      const step = (now) => {
+        const t = Math.min(1, (now - startTime) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(start + (target - start) * eased);
+        if (t < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(step);
+    };
+
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      const countObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            countObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      countEls.forEach((el) => countObserver.observe(el));
+    }
   }
 
   // Copiar email ao clicar no botão do footer

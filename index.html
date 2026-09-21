@@ -57,11 +57,11 @@
 <main id="main">
 
   <section class="section-hero">
-    <h1 class="hero-heading">
+    <h1 class="hero-heading js-hero-in" style="--d:0ms">
       <div class="hero-heading__block1">
         <span class="tr-design">Design</span><span class="tr-gap">&#160;</span><span class="tr-de">de</span><br>
         <span class="tr-produto">Produto&#160;&#160;&#160;</span><span class="amp-wrap">
-          <span class="pattern-orange" aria-hidden="true"></span>
+          <span class="pattern-orange js-hero-in" style="--d:260ms" aria-hidden="true"></span>
           <svg class="curved-text" viewBox="0 0 387 390" aria-hidden="true">
             <path id="curvedTextPath" d="M 193.5 0 A 193.5 195 0 0 0 0 195" fill="none"/>
             <text>
@@ -74,12 +74,12 @@
       <div class="hero-heading__block2">Experiência</div>
     </h1>
 
-    <p class="hero-subtitle">Entregando produtos digitais de ponta-à-ponta.</p>
+    <p class="hero-subtitle js-hero-in" style="--d:140ms">Entregando produtos digitais de ponta-à-ponta.</p>
   </section>
 
   <section class="section-projects" aria-label="Projetos">
 
-    <article class="case-card case-card--volkswagen" id="volkswagen">
+    <article class="case-card case-card--volkswagen reveal" id="volkswagen" data-reveal-index="0">
       <div class="case-card__inner">
         <div class="case-card__brand">
           <p class="case-card__client">Volkswagen</p>
@@ -99,7 +99,7 @@
       </div>
     </article>
 
-    <article class="case-card case-card--claro" id="claro">
+    <article class="case-card case-card--claro reveal" id="claro" data-reveal-index="1">
       <div class="case-card__inner">
         <div class="case-card__brand">
           <p class="case-card__client">Claro Pay</p>
@@ -108,7 +108,7 @@
           </div>
         </div>
         <div class="case-card__content">
-          <a href="#" class="case-card__view">ver<span class="plus">&#160;+</span></a>
+          <a href="case-claro.html" class="case-card__view">ver<span class="plus">&#160;+</span></a>
           <h3 class="case-card__heading">Melhorando a experiência do usuário através de um novo onboarding</h3>
           <div class="case-card__tags">
             <span class="tag tag--red">40% menos tempo de conclusão</span>
@@ -118,7 +118,7 @@
       </div>
     </article>
 
-    <article class="case-card case-card--peterson" id="peterson">
+    <article class="case-card case-card--peterson reveal" id="peterson" data-reveal-index="2">
       <div class="case-card__inner">
         <div class="case-card__brand">
           <p class="case-card__client">Peterson Solutions</p>
@@ -127,7 +127,7 @@
           </div>
         </div>
         <div class="case-card__content">
-          <a href="#" class="case-card__view">ver<span class="plus">&#160;+</span></a>
+          <a href="case-peterson.html" class="case-card__view">ver<span class="plus">&#160;+</span></a>
           <h3 class="case-card__heading">Como simplificar uma jornada B2B em um sistema legado de alta complexidade?</h3>
           <div class="case-card__tags">
             <span class="tag tag--navy">2.1 → 4.2 de satisfação</span>
@@ -146,11 +146,11 @@
 
       <header class="resume-header">
         <h2 class="resume-heading">Currículo</h2>
-        <div class="resume-daterange"><span>de 2019</span> <span class="dash">à</span> <span>2026</span></div>
+        <div class="resume-daterange"><span>de <span class="count" data-count-to="2019">2019</span></span> <span class="dash">à</span> <span><span class="count" data-count-to="2026">2026</span></span></div>
       </header>
 
       <ol class="resume-list">
-        <li class="resume-item">
+        <li class="resume-item reveal" data-reveal-index="0">
           <div class="resume-item__who">
             <h3>Volkswagen</h3>
             <p class="resume-item__via">através da Opah IT</p>
@@ -159,7 +159,7 @@
           <p class="resume-item__desc">Investigo a rotina de gestores de frotas para transformar dados complexos de veículos em interfaces claras. Desenvolvo protótipos do wireframe à validação com usuários e contribuo com a evolução do design system, garantindo consistência entre plataformas.</p>
           <p class="resume-item__date">Nov 2025 – Ago 2026</p>
         </li>
-        <li class="resume-item">
+        <li class="resume-item reveal" data-reveal-index="1">
           <div class="resume-item__who">
             <h3>Peterson Solutions</h3>
             <p class="resume-item__via">através da Tropiko</p>
@@ -168,7 +168,7 @@
           <p class="resume-item__desc">Conduzi o discovery do sistema global de certificações antes de propor qualquer solução. Criei o primeiro design system da empresa com mais de 40 componentes e WCAG 2.1 AA. O redesign reduziu o fluxo principal em 62% e elevou a satisfação de 2.1 para 4.2.</p>
           <p class="resume-item__date">Abr 2025 – Out 2025</p>
         </li>
-        <li class="resume-item">
+        <li class="resume-item reveal" data-reveal-index="2">
           <div class="resume-item__who">
             <h3>FAPESP</h3>
             <p class="resume-item__via">através da Stefanini</p>
@@ -177,7 +177,7 @@
           <p class="resume-item__desc">Realizei discovery com pesquisadores e administradores para entender fluxos complexos antes de desenhar as interfaces. Criei uma estrutura de requisitos que acelerou em 40% a aprovação com clientes e estabeleci padrões visuais que fortaleceram o design system.</p>
           <p class="resume-item__date">Out 2024 – Abr 2025</p>
         </li>
-        <li class="resume-item">
+        <li class="resume-item reveal" data-reveal-index="3">
           <div class="resume-item__who">
             <h3>Fiserv</h3>
             <p class="resume-item__via">através da Try Consultoria</p>
@@ -218,7 +218,7 @@
         <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 3.5A10.4 10.4 0 0012 0 10.5 10.5 0 001.6 14.8L0 21l6.4-1.6A10.5 10.5 0 0012 21a10.4 10.4 0 008.5-4.4A10.4 10.4 0 0022 12a10.4 10.4 0 00-1.5-8.5zM12 19a8 8 0 01-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1120 12a8 8 0 01-8 7z" fill="currentColor"/></svg>
         <span>+55 (11) 96720 4035</span>
       </a>
-      <a class="footer-contact__item" href="https://linkedin.com/in/victorgargi" target="_blank" rel="noopener">
+      <a class="footer-contact__item" href="https://www.linkedin.com/in/victor-gargi/" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7 10v7M7 7v.01M12 17v-4.5a2 2 0 014 0V17M12 10v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         <span>Victor Gargi</span>
       </a>

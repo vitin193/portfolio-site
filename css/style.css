@@ -506,6 +506,106 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
 .footer-contact__item .icon { width: 18px; height: 18px; }
 
 /* ===================================================================
+   Microinterações
+   =================================================================== */
+
+/* --- Entrada do Hero: fade + slide sutil ao carregar, um após o outro --- */
+.js-hero-in {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .8s cubic-bezier(.16,.8,.3,1), transform .8s cubic-bezier(.16,.8,.3,1);
+  transition-delay: var(--d, 0ms);
+}
+.js-hero-in.is-in { opacity: 1; transform: translateY(0); }
+/* o badge laranja some/some-a-aparecer junto, mas não deve mover o & — só o próprio badge */
+.pattern-orange.js-hero-in { transform: scale(.85); transform-origin: left center; }
+.pattern-orange.js-hero-in.is-in { transform: scale(1); }
+
+/* Texto curvo: rotação lenta e contínua */
+@media (prefers-reduced-motion: no-preference) {
+  .curved-text {
+    animation: spin-slow 40s linear infinite;
+    transform-origin: 50% 50%;
+  }
+}
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+
+/* --- Navegação --- */
+.nav__link, .nav__button {
+  position: relative;
+}
+.nav__link::after, .nav__button::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s cubic-bezier(.16,.8,.3,1);
+}
+.nav__link:hover::after, .nav__button:hover::after,
+.nav__link:focus-visible::after, .nav__button:focus-visible::after { transform: scaleX(1); }
+
+.nav__dropdown {
+  transform: translate(-50%, 6px);
+  transition: opacity .25s ease, transform .25s cubic-bezier(.16,.8,.3,1);
+}
+.nav__item--dropdown:hover .nav__dropdown,
+.nav__item--dropdown:focus-within .nav__dropdown,
+.nav__item--dropdown.is-open .nav__dropdown {
+  transform: translate(-50%, 0);
+}
+.nav__dropdown ul li {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .3s ease, transform .3s ease;
+}
+.nav__item--dropdown:hover .nav__dropdown ul li,
+.nav__item--dropdown:focus-within .nav__dropdown ul li,
+.nav__item--dropdown.is-open .nav__dropdown ul li { opacity: 1; transform: translateY(0); }
+.nav__dropdown ul li:nth-child(1) { transition-delay: .03s; }
+.nav__dropdown ul li:nth-child(2) { transition-delay: .07s; }
+.nav__dropdown ul li:nth-child(3) { transition-delay: .11s; }
+.nav__dropdown ul li:nth-child(4) { transition-delay: .15s; }
+
+.lang-toggle__track { transition: border-color .2s ease; }
+.lang-toggle__thumb { transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+.lang-toggle:active .lang-toggle__thumb { transform: scale(.82); }
+.lang-toggle[aria-pressed="true"]:active .lang-toggle__thumb { transform: translateX(26px) scale(.82); }
+
+/* --- Cards de projeto: hover + entrada por scroll --- */
+.case-card__inner {
+  transition: transform .35s cubic-bezier(.16,.8,.3,1), box-shadow .35s ease;
+}
+.case-card__inner:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -20px rgba(23, 33, 49, .28);
+}
+.case-card__icon { transition: transform .35s cubic-bezier(.16,.8,.3,1); }
+.case-card__inner:hover .case-card__icon { transform: scale(1.04); }
+.case-card__view { transition: transform .3s cubic-bezier(.16,.8,.3,1), gap .3s ease; }
+.case-card__inner:hover .case-card__view { transform: translateX(6px); }
+.tag { transition: background-color .25s ease, color .25s ease; }
+.tag--blue:hover { background: var(--accent-blue); color: #fff; }
+.tag--red:hover { background: var(--accent-red); color: #fff; }
+.tag--navy:hover { background: var(--accent-navy); color: #fff; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .7s cubic-bezier(.16,.8,.3,1), transform .7s cubic-bezier(.16,.8,.3,1);
+  transition-delay: calc(var(--reveal-index, 0) * 90ms);
+}
+.reveal.is-in { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-hero-in, .reveal { transition: none; opacity: 1; transform: none; }
+  .curved-text { animation: none; }
+  .case-card__inner, .case-card__icon, .case-card__view, .lang-toggle__thumb { transition: none; }
+}
+
+/* ===================================================================
    Responsive
    =================================================================== */
 @media (max-width: 900px) {
@@ -518,5 +618,4 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   .resume-item { flex-direction: column; gap: 12px; }
   .resume-item__who { flex-basis: auto; }
   .resume-item__date { text-align: left; }
-  .section-hero__bleed { display: none; }
 }

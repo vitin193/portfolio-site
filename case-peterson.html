@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peterson Solutions — Gargi</title>
+<meta name="description" content="Case study: como simplifiquei uma jornada B2B em um sistema legado de alta complexidade para a Peterson Solutions.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,700,800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/case.css">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header case-header">
+  <div class="site-header__container">
+    <a href="/" class="logo">
+      <img src="assets/images/logo-header.png" alt="Gargi" width="76" height="36" onerror="this.style.opacity=0">
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="/" class="nav__link">Início</a>
+
+      <div class="nav__item nav__item--dropdown">
+        <button class="nav__button" aria-expanded="false" aria-controls="projects-menu">
+          Projetos <span class="nav__badge">3</span>
+        </button>
+        <div class="nav__dropdown" id="projects-menu">
+          <ul>
+            <li><a href="/#volkswagen">Somapay PF</a></li>
+            <li><a href="/#volkswagen">Crédito do Trabalhador</a></li>
+            <li><a href="case-claro.html">Somapay PJ</a></li>
+            <li><a href="case-peterson.html">Petco VetPoint</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="nav__item">
+        <a href="/#curriculo" class="nav__link">Currículo</a>
+        <a href="assets/cv-victor-gargi.pdf" class="nav__icon-link" aria-label="Baixar currículo em PDF" download>
+          <svg class="icon icon--download" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <a href="/#footer" class="nav__link">Contato</a>
+
+      <button class="lang-toggle" id="langToggle" type="button" aria-pressed="false" aria-label="Mudar idioma para inglês">
+        <span class="lang-toggle__label">EN-US</span>
+        <span class="lang-toggle__track"><span class="lang-toggle__thumb"></span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="case-hero case-section--black">
+    <img class="case-hero__logo pending-asset" src="assets/images/logo-peterson-hero.png" alt="Peterson Solutions" width="220" height="41" onerror="this.style.display='none'">
+    <h1 class="case-hero__title">Como simplificar uma jornada B2B em um sistema legado de alta complexidade?</h1>
+    <p class="case-hero__subtitle">Redesenhei os fluxos de certificação, dei início ao design system fundacional da empresa e estruturei o processo de hand-off com o time de desenvolvimento.</p>
+  </section>
+
+  <section class="case-section case-section--navy">
+    <div class="case-section__inner case-intro">
+      <div class="case-blocks">
+        <div class="case-block">
+          <h2 class="case-block__heading">Contexto</h2>
+          <p>A Peterson Solutions certifica processos no agronegócio. O sistema era usado diariamente por auditores, técnicos e gestores com rotinas e níveis de experiência muito diferentes entre si.</p>
+        </div>
+        <div class="case-block">
+          <h2 class="case-block__heading">O desafio</h2>
+          <p>O projeto surgiu porque o custo operacional tinha se tornado visível: suporte sobrecarregado, dificuldade em reter auditores e ciclo de desenvolvimento lento pela falta de componentes reutilizáveis.</p>
+          <p>O processo principal de certificação exigia 47 cliques e 23 minutos. Não porque o processo em si fosse complexo, mas porque a interface não seguia a lógica de quem executava a tarefa.</p>
+        </div>
+        <div class="case-block">
+          <h2 class="case-block__heading">O que eu fiz</h2>
+          <p>Redesenhei o fluxo na ordem em que o usuário pensa, não na ordem em que o sistema foi construído. O design system foi definido antes de qualquer tela de alta fidelidade. A pressão era para mostrar progresso visual rápido, mas sem tokens e componentes estabelecidos qualquer interface gerada seria inconsistente com o que engenharia já construía em paralelo.</p>
+        </div>
+        <div class="case-block">
+          <h2 class="case-block__heading">O resultado</h2>
+          <p>Satisfação de 2.1 para 4.2. Chamados de suporte de 87 para 23 por mês. Tempo de conclusão do processo principal com 62% menos cliques. Tempo de implementação de novas features de 3 semanas para 2 semanas.</p>
+        </div>
+      </div>
+      <h2 class="case-kicker">Intro</h2>
+    </div>
+  </section>
+
+  <section class="case-section case-section--blue">
+    <div class="case-section__inner">
+      <div class="case-split">
+        <h2 class="case-kicker">Dados</h2>
+        <div class="case-split__text">
+          <p>O levantamento foi feito em conjunto com o time de requisitos, que conduziu entrevistas com usuários, e com sessões colaborativas com stakeholders onde esse material foi analisado.</p>
+          <p>Dois pontos direcionaram o projeto a partir daí.</p>
+          <p>O problema não era o número de cliques. Era a falta de feedback durante o processo. Os usuários não sabiam se tinham feito algo certo até receber um erro algumas etapas depois.</p>
+          <p>O segundo ponto foi sobre perfis. Auditores experientes e técnicos em treinamento executavam a mesma tarefa com caminhos mentais completamente diferentes. A interface ignorava isso e tratava os dois da mesma forma.</p>
+        </div>
+      </div>
+      <div class="case-stats-row">
+        <div class="case-stat">
+          <span class="case-stat__number">47</span>
+          <p class="case-stat__label">cliques no processo principal</p>
+        </div>
+        <div class="case-stat">
+          <span class="case-stat__number">23 min</span>
+          <p class="case-stat__label">tempo médio para conclusão do cadastro</p>
+        </div>
+        <div class="case-stat">
+          <span class="case-stat__number">2,1/5</span>
+          <p class="case-stat__label">satisfação inicial</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section case-section--navy">
+    <div class="case-section__inner case-split case-split--reverse">
+      <h2 class="case-kicker">Problema</h2>
+      <ol class="case-numbered-list" style="flex: 1 1 560px; max-width: 680px;">
+        <li>
+          <span class="case-numbered-list__index">01</span>
+          <div>
+            <h3 class="case-numbered-list__heading">Fluxos Complicados e Longos</h3>
+            <p>Processo de certificação exigia média de 47 cliques e 23 minutos para conclusão, com alta taxa de erros e retrabalho por falta de validações contextuais e feedback claro.</p>
+          </div>
+        </li>
+        <li>
+          <span class="case-numbered-list__index">02</span>
+          <div>
+            <h3 class="case-numbered-list__heading">Interface Legada e Confusa</h3>
+            <p>Usuários reportavam apenas 2.1/5 de satisfação. Principais queixas: dificuldade em encontrar funcionalidades e compreender status dos processos.</p>
+          </div>
+        </li>
+        <li>
+          <span class="case-numbered-list__index">03</span>
+          <div>
+            <h3 class="case-numbered-list__heading">Ausência de Padronização</h3>
+            <p>Sem design system, o desenvolvimento criava componentes de forma isolada, gerando inconsistências visuais e que dificultavam a manutenção do código.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="case-section case-section--purple">
+    <div class="case-section__inner">
+      <h2 class="case-kicker" style="margin-bottom: 20px;">Solução</h2>
+      <p style="font-family: var(--font-body); font-size: 20px; max-width: 600px; margin: 0 0 60px;">Três pilares fundamentais que transformaram a experiência do produto e a eficiência do time.</p>
+
+      <div class="case-pillars">
+        <div class="case-pillar">
+          <h3 class="case-pillar__heading">Mapeamento com o time de requisitos</h3>
+          <div class="case-pillar__text">
+            <p>Foram diversas conversas, facilitações e reuniões com o time de requisitos e stakeholders para alinharmos as definições de negócios.</p>
+            <p>O entendimento da jornada pela perspectiva do usuário se tornou o fator decisivo no momento de definir a função/tarefa que a tela tinha como objetivo em executar.</p>
+          </div>
+          <div class="case-pillar__media">
+            <img src="assets/images/case-peterson-mapeamento.png" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('pending-asset'); this.parentElement.innerHTML='Imagem pendente — mapeamento com o time de requisitos';">
+          </div>
+        </div>
+        <div class="case-pillar">
+          <h3 class="case-pillar__heading">Simplificação de Fluxos</h3>
+          <div class="case-pillar__text">
+            <p>Reestruturei completamente os fluxos de certificação, recomeçando o entendimento da jornada no wireframe, reduzindo etapas desnecessárias e reorganizando informações com base nos padrões mentais dos usuários.</p>
+            <p>O processo principal foi reduzido de 47 para 18 cliques, com hierarquia visual clara e feedback contextual em cada etapa.</p>
+          </div>
+          <div class="case-pillar__media">
+            <img src="assets/images/case-peterson-fluxos.png" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('pending-asset'); this.parentElement.innerHTML='Imagem pendente — simplificação de fluxos';">
+          </div>
+        </div>
+        <div class="case-pillar">
+          <h3 class="case-pillar__heading">Processo de Hand-off Estruturado</h3>
+          <div class="case-pillar__text">
+            <p>Criei um processo de hand-off que transformou a colaboração entre design e desenvolvimento, com documentação detalhada de specs técnicas e assets organizados para produção.</p>
+            <p>Reuniões de alinhamento semanais entre design e engenharia reduziram retrabalho em 71% e aceleraram a implementação das novas telas.</p>
+          </div>
+          <div class="case-pillar__media">
+            <img src="assets/images/case-peterson-handoff.png" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('pending-asset'); this.parentElement.innerHTML='Imagem pendente — hand-off estruturado';">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section case-section--blue">
+    <div class="case-section__inner case-split">
+      <div class="case-split__text" style="max-width: 560px;">
+        <p>A experiência problemática resultava em queda na produtividade dos usuários, aumento significativo em chamados de suporte (média de 87 tickets/mês), dificuldade na contratação e retenção de auditores, além de lentidão no ciclo de desenvolvimento por falta de componentes reutilizáveis e guidelines claras.</p>
+        <p>Esses números deixaram claro que o problema não era só de usabilidade, mas um risco direto para o negócio — e foi isso que tornou o redesign uma prioridade estratégica da empresa.</p>
+      </div>
+      <h2 class="case-kicker">Impacto</h2>
+    </div>
+  </section>
+
+  <section class="case-section case-section--navy">
+    <div class="case-section__inner">
+      <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(36px,5vw,72px); margin: 0 0 56px;">Resultados Mensuráveis</h2>
+      <div class="case-result-cards">
+        <div class="case-result-card">
+          <div class="case-result-card__icon"></div>
+          <div class="case-result-card__body">
+            <span class="case-result-card__number">-62%</span>
+            <div class="case-result-card__text">
+              <h3 class="case-result-card__title">Tempo de Conclusão de Tarefas</h3>
+              <p class="case-result-card__desc">Fluxos otimizados reduziram drasticamente o tempo necessário para completar processos principais.</p>
+            </div>
+          </div>
+        </div>
+        <div class="case-result-card">
+          <div class="case-result-card__icon"></div>
+          <div class="case-result-card__body">
+            <span class="case-result-card__number">+58%</span>
+            <div class="case-result-card__text">
+              <h3 class="case-result-card__title">Velocidade de Desenvolvimento</h3>
+              <p class="case-result-card__desc">Redução no tempo de implementação de novas features graças ao design system e componentes reutilizáveis.</p>
+            </div>
+          </div>
+        </div>
+        <div class="case-result-card">
+          <div class="case-result-card__icon"></div>
+          <div class="case-result-card__body">
+            <span class="case-result-card__number">4.2/5</span>
+            <div class="case-result-card__text">
+              <h3 class="case-result-card__title">Satisfação do Usuário</h3>
+              <p class="case-result-card__desc">Aumento de 2.1 para 4.2 na avaliação de satisfação dos usuários finais após redesign.</p>
+            </div>
+          </div>
+        </div>
+        <div class="case-result-card">
+          <div class="case-result-card__icon"></div>
+          <div class="case-result-card__body">
+            <span class="case-result-card__number">-71%</span>
+            <div class="case-result-card__text">
+              <h3 class="case-result-card__title">Retrabalho em Desenvolvimento</h3>
+              <p class="case-result-card__desc">Documentação clara e hand-off estruturado minimizaram ajustes e correções pós-implementação.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section case-section--black case-disclosure">
+    <div class="case-section__inner">
+      <p>Este case study contém informações de projetos desenvolvidos sob acordos de confidencialidade (NDA). Alguns detalhes sensíveis foram alterados ou omitidos para respeitar esses compromissos. O conteúdo apresentado aqui reflete minhas próprias análises e contribuições e não representa necessariamente a posição oficial das empresas envolvidas.</p>
+      <p class="case-thanks">Obrigado pelo seu tempo!</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="footer">
+  <div class="site-footer__container">
+    <a href="/" class="logo logo--footer">
+      <img src="assets/images/logo-footer.png" alt="Gargi" width="127" height="60" onerror="this.style.opacity=0">
+    </a>
+
+    <div class="footer-contact">
+      <button class="footer-contact__item" id="copyEmail" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>hello@gargidesign.com</span>
+      </button>
+      <a class="footer-contact__item" href="https://wa.me/5511967204035" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 3.5A10.4 10.4 0 0012 0 10.5 10.5 0 001.6 14.8L0 21l6.4-1.6A10.5 10.5 0 0012 21a10.4 10.4 0 008.5-4.4A10.4 10.4 0 0022 12a10.4 10.4 0 00-1.5-8.5zM12 19a8 8 0 01-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1120 12a8 8 0 01-8 7z" fill="currentColor"/></svg>
+        <span>+55 (11) 96720 4035</span>
+      </a>
+      <a class="footer-contact__item" href="https://www.linkedin.com/in/victor-gargi/" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7 10v7M7 7v.01M12 17v-4.5a2 2 0 014 0V17M12 10v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Victor Gargi</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

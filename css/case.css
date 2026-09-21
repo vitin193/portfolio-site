@@ -1,0 +1,379 @@
+/* ===================================================================
+   Gargi — Portfolio · Páginas de Case (Peterson, Claro, Volkswagen)
+   Fonte de verdade: Figma "gargiPortfolio2026", frames "02 - CaseControlUnion"
+   (Peterson) e "03 - CaseClaro".
+
+   Nota sobre fontes: por pedido do Victor, todo o corpo de texto foi
+   normalizado para Satoshi (o Figma original misturava Inter/Lato em
+   alguns blocos — resquício do template). Os títulos grandes usam
+   var(--font-display) como fonte de marcação temporária, até a fonte
+   definitiva (Typo Grotesk ou alternativa) ser decidida — mesmo
+   esquema já usado na Home.
+
+   Nota sobre imagens: os mockups de tela, prints de concorrentes e
+   fotos do processo ainda não foram enviados — os blocos abaixo ficam
+   como placeholders (onerror oculta) até chegarem os arquivos reais.
+   =================================================================== */
+
+:root {
+  --case-black: #0c0c0c;
+  --case-navy: #171a31;
+  --case-blue-pale: #a9cee0;
+  --case-purple: #414881;
+  --case-red-deep: #7f160d;
+  --case-terracotta: #d97466;
+  --case-red-bright: #d52b1e;
+  --case-cream: #f2f2f1;
+}
+
+/* --- Header overlay (transparente sobre o hero escuro) --- */
+.case-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  background: transparent;
+}
+.case-header .site-header__container { background: transparent; }
+.case-header .nav__link,
+.case-header .nav__button,
+.case-header .lang-toggle__label,
+.case-header .logo,
+.case-header .nav__link::after,
+.case-header .nav__button::after { color: var(--case-cream); }
+.case-header .logo img { filter: brightness(0) invert(1); }
+.case-header .nav__badge { background: var(--case-cream); color: var(--case-navy); }
+.case-header .icon { color: var(--case-cream); }
+.case-header .nav__dropdown { background: var(--case-cream); }
+.case-header .nav__dropdown a { color: var(--case-navy); }
+
+/* --- Hero --- */
+.case-hero {
+  padding: 190px var(--gutter) 90px;
+  color: var(--case-cream);
+}
+.case-hero__logo { height: 41px; width: auto; margin-bottom: 56px; opacity: .95; }
+.case-hero__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(32px, 6vw, 92px);
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  max-width: 1160px;
+  margin: 0 0 28px;
+}
+.case-hero__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.6vw, 21px);
+  line-height: 1.58;
+  letter-spacing: 0.01em;
+  max-width: 780px;
+  margin: 0;
+}
+
+/* --- Section shell --- */
+.case-section {
+  padding: 100px var(--gutter);
+}
+.case-section__inner {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.case-section--black     { background: var(--case-black); color: var(--case-cream); }
+.case-section--navy      { background: var(--case-navy); color: var(--case-cream); }
+.case-section--blue      { background: var(--case-blue-pale); color: var(--case-navy); }
+.case-section--purple    { background: var(--case-purple); color: var(--case-cream); }
+.case-section--red-deep  { background: var(--case-red-deep); color: var(--case-cream); }
+.case-section--terracotta{ background: var(--case-terracotta); color: var(--case-navy); }
+.case-section--red-bright{ background: var(--case-red-bright); color: var(--case-cream); }
+.case-section--cream     { background: var(--case-cream); color: var(--case-black); }
+
+/* --- Kicker (título gigante de seção: "Intro", "Dados", "Problema"...) --- */
+.case-kicker {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(40px, 7vw, 110px);
+  line-height: 0.92;
+  margin: 0;
+}
+.case-split {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.case-split--reverse { flex-direction: row-reverse; }
+.case-split__text { flex: 1 1 480px; max-width: 620px; }
+.case-split__text p + p { margin-top: 20px; }
+.case-split__text p {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.62;
+  margin: 0;
+}
+
+/* --- Blocos de texto (Contexto / O desafio / O que eu fiz / Resultado) --- */
+.case-blocks { display: flex; flex-direction: column; gap: 52px; max-width: 700px; }
+.case-block__heading {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 27px;
+  margin: 0 0 16px;
+}
+.case-block p {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.62;
+  margin: 0;
+}
+.case-block p + p { margin-top: 14px; }
+.case-intro { display: flex; gap: 60px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
+.case-intro .case-kicker { flex: 0 0 auto; }
+
+/* --- Estatísticas simples (linha "Dados") --- */
+.case-stats-row {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+.case-stat {
+  flex: 1 1 240px;
+  text-align: center;
+  padding: 34px 24px 28px;
+}
+.case-stat__number {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 1;
+  display: block;
+  margin-bottom: 14px;
+}
+.case-stat__label {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.45;
+  max-width: 210px;
+  margin: 0 auto;
+}
+
+/* --- Lista numerada (Problema) --- */
+.case-numbered-list { list-style: none; margin: 40px 0 0; padding: 0; }
+.case-numbered-list li {
+  display: flex;
+  gap: 24px;
+  padding: 40px 0;
+  border-top: 1px solid rgba(242, 242, 241, 0.15);
+}
+.case-numbered-list li:first-child { border-top: none; }
+.case-numbered-list__index {
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding-top: 6px;
+  flex: 0 0 40px;
+  opacity: 0.75;
+}
+.case-numbered-list__heading {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(28px, 3.6vw, 48px);
+  line-height: 1.05;
+  margin: 0 0 14px;
+}
+.case-numbered-list p {
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 680px;
+}
+
+/* --- Pilares com imagem (Solução) --- */
+.case-pillars { display: flex; flex-direction: column; gap: 90px; margin-top: 60px; }
+.case-pillar__heading {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(28px, 3.6vw, 48px);
+  margin: 0 0 30px;
+}
+.case-pillar__text { display: flex; gap: 60px; flex-wrap: wrap; margin-bottom: 34px; }
+.case-pillar__text p {
+  flex: 1 1 320px;
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.6;
+  text-align: justify;
+  margin: 0;
+}
+.case-pillar__media {
+  background: rgba(242, 242, 241, 0.08);
+  border: 1px solid rgba(242, 242, 241, 0.18);
+  border-radius: 20px;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.case-pillar__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.case-pillar__media--empty {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(242, 242, 241, 0.5);
+  text-align: center;
+  padding: 24px;
+}
+
+/* --- Cards de resultado (Resultados Mensuráveis) --- */
+.case-result-cards { display: flex; flex-direction: column; gap: 24px; margin-top: 48px; }
+.case-result-card {
+  background: var(--case-cream);
+  color: var(--case-black);
+  border-radius: 16px;
+  padding: 34px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.case-result-card__icon {
+  width: 56px; height: 56px;
+  border-radius: 20px;
+  background: #1b1e42;
+  flex: 0 0 56px;
+}
+.case-result-card__body { flex: 1 1 280px; display: flex; gap: 40px; align-items: flex-end; flex-wrap: wrap; }
+.case-result-card__number {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 40px;
+  color: #1b1e42;
+  flex: 0 0 auto;
+}
+.case-result-card__text { flex: 1 1 260px; }
+.case-result-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  margin: 0 0 8px;
+  color: #101828;
+}
+.case-result-card__desc {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4a5565;
+  margin: 0;
+}
+
+/* --- Papel/função (Claro: "Meu papel") --- */
+.case-role-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+.case-role-list__heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0 0 12px;
+}
+.case-role-list p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --- Mockups de tela (Claro: fluxo em celulares) --- */
+.case-phone-row {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 8px 0 16px;
+  scrollbar-width: thin;
+}
+.case-phone {
+  flex: 0 0 220px;
+  aspect-ratio: 383 / 678;
+  border-radius: 28px;
+  background: rgba(242, 242, 241, 0.08);
+  border: 1px solid rgba(242, 242, 241, 0.2);
+  overflow: hidden;
+}
+.case-phone img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* --- Miniaturas (Claro: prints de concorrentes) --- */
+.case-thumb-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+}
+.case-thumb {
+  width: 124px; height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(23, 26, 49, 0.12);
+  box-shadow: 0 8px 12px 6px rgba(0,0,0,.1), 0 4px 4px rgba(0,0,0,.15);
+}
+.case-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* --- Aviso de confidencialidade / encerramento --- */
+.case-disclosure p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.65;
+  max-width: 880px;
+  margin: 0 0 40px;
+  opacity: 0.92;
+}
+.case-disclosure .case-thanks {
+  font-family: var(--font-body);
+  font-size: 16px;
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* --- Placeholder genérico para imagem/asset pendente --- */
+.pending-asset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 13px;
+  text-align: center;
+  color: rgba(23, 26, 49, 0.45);
+  background: repeating-linear-gradient(
+    45deg, rgba(23,26,49,.05), rgba(23,26,49,.05) 10px,
+    rgba(23,26,49,.09) 10px, rgba(23,26,49,.09) 20px
+  );
+}
+.case-section--navy .pending-asset,
+.case-section--black .pending-asset,
+.case-section--purple .pending-asset,
+.case-section--red-deep .pending-asset,
+.case-section--red-bright .pending-asset {
+  color: rgba(242, 242, 241, 0.55);
+  background: repeating-linear-gradient(
+    45deg, rgba(242,242,241,.05), rgba(242,242,241,.05) 10px,
+    rgba(242,242,241,.09) 10px, rgba(242,242,241,.09) 20px
+  );
+}
+
+@media (max-width: 900px) {
+  :root { --gutter: 32px; }
+  .case-hero { padding-top: 140px; }
+  .case-intro { flex-direction: column; gap: 40px; }
+  .case-split { flex-direction: column; }
+  .case-split--reverse { flex-direction: column; }
+  .case-role-list { grid-template-columns: 1fr; }
+  .case-pillar__text { flex-direction: column; }
+  .case-result-card__body { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-phone-row { scroll-behavior: auto; }
+}
