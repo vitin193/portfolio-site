@@ -158,22 +158,163 @@
     });
   }
 
-  // --- Carrosséis: arrastar com o mouse (touch/trackpad já rolam nativamente) ---
+  // --- Carrosséis: arrasto com inércia + slider minimalista ---
+  // Sem scroll-snap: o "proximity" puxava o carrossel de volta ao soltar o
+  // arrasto (o tranco que dava a sensação de travado). No lugar, o arrasto do
+  // mouse continua deslizando e desacelera; setas/teclado vão de tela em tela.
+  const isEn = document.documentElement.lang.startsWith('en');
+  const label = isEn
+    ? { prev: 'Previous', next: 'Next', slider: 'Carousel position' }
+    : { prev: 'Anterior', next: 'Próximo', slider: 'Posição do carrossel' };
+  const arrow = (d) => '<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="' + d +
+    '" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
   carousels.forEach((carousel) => {
     carousel.classList.add('is-draggable');
     if (!carousel.hasAttribute('tabindex')) carousel.setAttribute('tabindex', '0');
     if (!carousel.hasAttribute('role')) carousel.setAttribute('role', 'region');
+    const items = [...carousel.children];
+    const behavior = reduceMotion ? 'auto' : 'smooth';
+
+    // Imagens lazy num contêiner horizontal só carregavam (e decodificavam)
+    // no meio do deslize; carrega tudo um pouco antes do carrossel aparecer
+    const imgs = [...carousel.querySelectorAll('img')];
+    imgs.forEach((img) => { img.decoding = 'async'; });
+    if ('IntersectionObserver' in window) {
+      const preload = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        imgs.forEach((img) => { img.loading = 'eager'; });
+        preload.disconnect();
+      }, { rootMargin: '600px 0px' });
+      preload.observe(carousel);
+    }
+
+    // --- Slider: trilho fino com a fatia visível + setas ---
+    const slider = document.createElement('div');
+    slider.className = 'case-slider';
+    slider.innerHTML =
+      '<div class="case-slider__track" role="scrollbar" aria-label="' + label.slider + '" aria-orientation="horizontal"' +
+        ' aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="case-slider__thumb"></span></div>' +
+      '<div class="case-slider__nav">' +
+        '<button type="button" class="case-slider__btn" aria-label="' + label.prev + '">' + arrow('M12 4 6 10l6 6') + '</button>' +
+        '<button type="button" class="case-slider__btn" aria-label="' + label.next + '">' + arrow('M8 4l6 6-6 6') + '</button>' +
+      '</div>';
+    carousel.after(slider);
+    const track = slider.querySelector('.case-slider__track');
+    const thumb = slider.querySelector('.case-slider__thumb');
+    const [prevBtn, nextBtn] = slider.querySelectorAll('.case-slider__btn');
+
+    const maxScroll = () => carousel.scrollWidth - carousel.clientWidth;
+    let thumbW = 0;
+    let trackW = 0;
+    let painting = false;
+    const paint = () => {
+      painting = false;
+      const max = maxScroll();
+      const p = max > 0 ? Math.min(1, Math.max(0, carousel.scrollLeft / max)) : 0;
+      thumb.style.transform = 'translateX(' + p * (trackW - thumbW) + 'px)';
+      track.setAttribute('aria-valuenow', String(Math.round(p * 100)));
+      prevBtn.disabled = carousel.scrollLeft <= 1;
+      nextBtn.disabled = carousel.scrollLeft >= max - 1;
+    };
+    const layout = () => {
+      slider.hidden = maxScroll() <= 1;
+      trackW = track.clientWidth;
+      const ratio = carousel.scrollWidth ? carousel.clientWidth / carousel.scrollWidth : 1;
+      thumbW = Math.max(40, trackW * Math.min(1, ratio));
+      thumb.style.width = thumbW + 'px';
+      paint();
+    };
+
+    // Enquanto rola, o hover das telas fica desligado (elas passavam sob o
+    // cursor parado e ficavam subindo/descendo durante o deslize)
+    let scrollIdle;
+    carousel.addEventListener('scroll', () => {
+      if (!painting) { painting = true; requestAnimationFrame(paint); }
+      carousel.classList.add('is-scrolling');
+      clearTimeout(scrollIdle);
+      scrollIdle = setTimeout(() => carousel.classList.remove('is-scrolling'), 160);
+    }, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(layout).observe(carousel);
+    window.addEventListener('resize', layout);
+    imgs.forEach((img) => img.addEventListener('load', layout));
+    layout();
+
+    // Posição de cada item dentro do carrossel (independe do offsetParent)
+    const itemLeft = (item) =>
+      item.getBoundingClientRect().left - carousel.getBoundingClientRect().left + carousel.scrollLeft -
+      (parseFloat(getComputedStyle(carousel).paddingLeft) || 0);
+    const step = (dir) => {
+      stopGlide();
+      const x = carousel.scrollLeft;
+      const lefts = items.map(itemLeft);
+      const target = dir > 0 ? lefts.find((l) => l > x + 2) : lefts.reverse().find((l) => l < x - 2);
+      carousel.scrollTo({ left: target === undefined ? (dir > 0 ? maxScroll() : 0) : target, behavior });
+    };
+    prevBtn.addEventListener('click', () => step(-1));
+    nextBtn.addEventListener('click', () => step(1));
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      step(e.key === 'ArrowRight' ? 1 : -1);
+    });
+
+    // Trilho: clicar/arrastar move o carrossel na hora
+    const scrollFromTrack = (clientX, grab) => {
+      const p = (clientX - track.getBoundingClientRect().left - grab) / Math.max(1, trackW - thumbW);
+      carousel.scrollLeft = Math.min(1, Math.max(0, p)) * maxScroll();
+    };
+    track.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0) return;
+      stopGlide();
+      const thumbRect = thumb.getBoundingClientRect();
+      const onThumb = e.clientX >= thumbRect.left && e.clientX <= thumbRect.right;
+      const grab = onThumb ? e.clientX - thumbRect.left : thumbW / 2;
+      track.setPointerCapture(e.pointerId);
+      slider.classList.add('is-active');
+      scrollFromTrack(e.clientX, grab);
+      const move = (ev) => scrollFromTrack(ev.clientX, grab);
+      const up = () => {
+        slider.classList.remove('is-active');
+        track.removeEventListener('pointermove', move);
+        track.removeEventListener('pointerup', up);
+        track.removeEventListener('pointercancel', up);
+      };
+      track.addEventListener('pointermove', move);
+      track.addEventListener('pointerup', up);
+      track.addEventListener('pointercancel', up);
+    });
+
+    // --- Arrasto com o mouse + inércia (touch/trackpad já rolam nativamente) ---
     let startX = 0;
     let startScroll = 0;
     let dragging = false;
     let moved = false;
+    let samples = [];
+    let glideFrame = 0;
+    function stopGlide() { cancelAnimationFrame(glideFrame); glideFrame = 0; }
+    const glide = (velocity) => { // px/ms
+      let v = velocity;
+      let last = performance.now();
+      const frame = (now) => {
+        const dt = Math.max(0, Math.min(32, now - last));
+        last = now;
+        carousel.scrollLeft -= v * dt;
+        v *= Math.pow(0.994, dt); // atrito (~0,9 por quadro de 16ms)
+        const atEdge = carousel.scrollLeft <= 0 || carousel.scrollLeft >= maxScroll() - 1;
+        glideFrame = Math.abs(v) > 0.02 && !atEdge ? requestAnimationFrame(frame) : 0;
+      };
+      glideFrame = requestAnimationFrame(frame);
+    };
 
     carousel.addEventListener('pointerdown', (e) => {
       if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      stopGlide();
       dragging = true;
       moved = false;
       startX = e.clientX;
       startScroll = carousel.scrollLeft;
+      samples = [{ x: e.clientX, t: e.timeStamp }];
     });
     carousel.addEventListener('pointermove', (e) => {
       if (!dragging) return;
@@ -183,22 +324,28 @@
         carousel.classList.add('is-dragging');
         carousel.setPointerCapture(e.pointerId);
       }
-      if (moved) carousel.scrollLeft = startScroll - dx;
+      if (!moved) return;
+      carousel.scrollLeft = startScroll - dx;
+      samples.push({ x: e.clientX, t: e.timeStamp });
+      if (samples.length > 6) samples.shift();
     });
-    const stop = () => {
+    const stop = (e) => {
+      if (!dragging) return;
       dragging = false;
       carousel.classList.remove('is-dragging');
+      if (!moved || reduceMotion) return;
+      // velocidade dos últimos ~100ms; se o mouse parou antes de soltar, não desliza
+      const recent = samples.filter((s) => e.timeStamp - s.t < 100);
+      if (recent.length < 2) return;
+      const first = recent[0];
+      const last = recent[recent.length - 1];
+      const v = (last.x - first.x) / Math.max(1, last.t - first.t);
+      if (Math.abs(v) > 0.1) glide(Math.max(-4, Math.min(4, v)));
     };
     carousel.addEventListener('pointerup', stop);
     carousel.addEventListener('pointercancel', stop);
+    carousel.addEventListener('wheel', stopGlide, { passive: true });
+    carousel.addEventListener('touchstart', stopGlide, { passive: true });
     carousel.addEventListener('dragstart', (e) => e.preventDefault());
-
-    // Setas do teclado quando o carrossel está em foco
-    carousel.addEventListener('keydown', (e) => {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      e.preventDefault();
-      const step = carousel.clientWidth * 0.6;
-      carousel.scrollBy({ left: e.key === 'ArrowRight' ? step : -step, behavior: reduceMotion ? 'auto' : 'smooth' });
-    });
   });
 })();

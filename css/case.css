@@ -468,8 +468,8 @@
   display: flex;
   gap: 40px;
   overflow-x: auto;
-  scroll-snap-type: x proximity;
   scrollbar-width: none;
+  overscroll-behavior-x: contain; /* o deslize não "vaza" para o voltar/avançar do navegador */
   -webkit-overflow-scrolling: touch;
 }
 .case-carousel::-webkit-scrollbar { display: none; }
@@ -480,7 +480,6 @@
   height: 400px;
   width: auto;
   display: block;
-  scroll-snap-align: start;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -799,7 +798,60 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
 /* Carrosséis e fileiras de telas: arrastáveis com o mouse, telas levantam no hover */
 .is-draggable { cursor: grab; }
 .is-dragging { cursor: grabbing; scroll-snap-type: none; }
-.is-dragging > * { pointer-events: none; }
+.is-dragging > *,
+.is-scrolling > * { pointer-events: none; }
+
+/* Slider dos carrosséis (criado pelo case-motion.js): linha fina com a fatia
+   visível + duas setas. Usa currentColor, então segue a cor de cada seção. */
+.case-slider {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 32px;
+}
+.case-slider[hidden] { display: none; }
+.case-slider__track {
+  position: relative;
+  flex: 1 1 auto;
+  height: 24px;            /* área de toque; a linha visível é o ::before */
+  cursor: pointer;
+  touch-action: none;
+}
+.case-slider__track::before {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 1px;
+  background: currentColor;
+  opacity: .25;
+}
+.case-slider__thumb {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 2px;
+  margin-top: -1px;
+  background: currentColor;
+  border-radius: 2px;
+  will-change: transform;
+  transition: height .2s ease, margin-top .2s ease;
+}
+.case-slider__track:hover .case-slider__thumb,
+.case-slider.is-active .case-slider__thumb { height: 4px; margin-top: -2px; }
+.case-slider__nav { display: flex; gap: 4px; flex: 0 0 auto; }
+.case-slider__btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: inherit;
+  transition: opacity .2s ease, background-color .2s ease;
+}
+.case-slider__btn:hover:not(:disabled) { background: color-mix(in srgb, currentColor 12%, transparent); }
+.case-slider__btn:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
+.case-slider__btn:disabled { opacity: .3; cursor: default; }
+.cl-phones .case-slider { margin: 0 var(--gutter) 0 0; }
 .case-carousel { padding: 8px 0 16px; margin: -8px 0 -16px; }
 .case-carousel > .reveal,
 .case-phone-row > .reveal { transition: opacity .7s cubic-bezier(.16,.8,.3,1), transform .7s cubic-bezier(.16,.8,.3,1), box-shadow .35s ease; }
@@ -926,6 +978,7 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
   }
   .case-carousel { gap: 20px; }
   .case-carousel img { height: 240px; }
+  .case-slider { margin-top: 20px; gap: 16px; }
   .case-project-card { height: 260px; }
   .cs-disclosure .case-thanks { align-self: flex-start; }
 }
