@@ -649,7 +649,9 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 107px var(--gutter); /* same side inset as hero/cases/résumé */
+  /* mesmo recuo lateral do .site-header__container, pra o logo do rodapé
+     ficar alinhado com o do header */
+  padding: 56px 32px;
   flex-wrap: wrap;
   gap: 40px;
 }
@@ -682,9 +684,35 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   transition-delay: var(--d, 0ms);
 }
 .js-hero-in.is-in { opacity: 1; transform: translateY(0); }
-/* o badge laranja some/some-a-aparecer junto, mas não deve mover o & — só o próprio badge */
-.pattern-orange.js-hero-in { transform: translateY(-50%) scale(.85); transform-origin: left center; }
-.pattern-orange.js-hero-in.is-in { transform: translateY(-50%) scale(1); }
+/* título: o h1 só faz fade (leva o texto curvo junto); o resto entra em
+   sequência — "Design de" e "Produto" deslizando da esquerda, a faixa laranja
+   vindo da direita (de fora da página) e "Experiência" da esquerda; o "&" só
+   entra depois que a faixa assenta, deslizando por cima dela */
+.hero-heading.js-hero-in { transform: none; }
+.hero-line { display: block; }
+.hero-line.js-hero-in,
+.tr-produto.js-hero-in {
+  display: inline-block;
+  transform: translateX(-0.35em);
+  transition-duration: .9s;
+}
+.hero-line.js-hero-in { display: block; }
+.hero-line.js-hero-in.is-in,
+.tr-produto.js-hero-in.is-in { transform: translateX(0); }
+/* faixa: entra inteira pela direita, sem fade (já começa fora da tela) */
+.pattern-orange.js-hero-in {
+  opacity: 1;
+  transform: translate(100%, -50%);
+  transition: transform 1s cubic-bezier(.16,.8,.3,1) var(--d, 0ms);
+}
+.pattern-orange.js-hero-in.is-in { transform: translate(0, -50%); }
+/* "&": percorre um bom trecho da faixa; o fade é curto para o deslize aparecer */
+.tr-amp.js-hero-in {
+  display: inline-block;
+  transform: translateX(2em);
+  transition: opacity .3s ease var(--d, 0ms), transform .75s cubic-bezier(.16,.8,.3,1) var(--d, 0ms);
+}
+.tr-amp.js-hero-in.is-in { transform: translateX(0); }
 
 /* Texto curvo: rotação lenta e contínua */
 @media (prefers-reduced-motion: no-preference) {
@@ -759,11 +787,56 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   transition-delay: calc(var(--reveal-index, 0) * 90ms);
 }
 .reveal.is-in { opacity: 1; transform: translateY(0); }
+/* Cards dos cases: em vez de subir, o retângulo entra inteiro da esquerda
+   (de fora da página, do lado em que ele sangra). O deslize fica no
+   .case-card__inner com a propriedade `translate` — separada do `transform`
+   do hover — e o .case-card continua parado, para o IntersectionObserver
+   enxergá-lo na posição real. */
+.case-card.reveal { opacity: 1; transform: none; }
+.case-card.reveal .case-card__inner {
+  translate: -100% 0;
+  transition:
+    transform .35s cubic-bezier(.16,.8,.3,1),
+    box-shadow .35s ease,
+    translate 1s cubic-bezier(.16,.8,.3,1) calc(var(--reveal-index, 0) * 120ms);
+}
+.case-card.reveal.is-in .case-card__inner { translate: 0 0; }
+
+/* --- Entrada do Currículo: mesma lógica da faixa laranja do hero ---
+   O main.js põe .is-in no .resume-header quando ele aparece no scroll:
+   "Currículo" desliza da direita e, ao mesmo tempo, a faixa vermelha entra
+   inteira pela esquerda (de fora da página, do lado em que ela sangra);
+   quando a faixa assenta, os números também chegam de fora da página pela
+   esquerda, percorrendo a faixa, já contando do zero (a contagem é disparada
+   pelo JS junto com o início desse deslize — manter o delay .6s em sincronia
+   com COUNT_DELAY no main.js). */
+.resume-heading {
+  opacity: 0;
+  transform: translateX(0.35em);
+  transition: opacity .8s cubic-bezier(.16,.8,.3,1), transform .9s cubic-bezier(.16,.8,.3,1);
+}
+.resume-daterange::before {
+  transform: translate(-100%, -50%);
+  transition: transform 1s cubic-bezier(.16,.8,.3,1);
+}
+/* -100vw garante que eles partam de fora da tela em qualquer largura; sem
+   fade, como a faixa — o que esconde é estar fora da página */
+.resume-daterange > * {
+  transform: translateX(-100vw);
+  transition: transform 1s cubic-bezier(.16,.8,.3,1) .6s;
+}
+.resume-header.is-in .resume-heading,
+.resume-header.is-in .resume-daterange > * { opacity: 1; transform: translateX(0); }
+.resume-header.is-in .resume-daterange::before { transform: translate(0, -50%); }
 
 @media (prefers-reduced-motion: reduce) {
-  .js-hero-in, .reveal { transition: none; opacity: 1; transform: none; }
+  .js-hero-in, .hero-line.js-hero-in, .tr-produto.js-hero-in, .tr-amp.js-hero-in, .reveal { transition: none; opacity: 1; transform: none; }
+  .pattern-orange.js-hero-in { transition: none; transform: translate(0, -50%); }
   .curved-text { animation: none; }
   .case-card__inner, .case-card__icon, .case-card__view, .lang-toggle__thumb { transition: none; }
+  .case-card.reveal .case-card__inner { transition: none; translate: none; }
+  .resume-heading, .resume-daterange > * { transition: none; opacity: 1; transform: none; }
+  .resume-daterange::before { transition: none; transform: translateY(-50%); }
 }
 
 /* ===================================================================

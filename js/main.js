@@ -68,25 +68,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- Contagem (anos do currículo) ---
+  // --- Contagem (anos do currículo + números das páginas de case) ---
   const countEls = document.querySelectorAll('.count[data-count-to]');
-  if (countEls.length) {
-    const animateCount = (el) => {
-      const target = parseInt(el.getAttribute('data-count-to'), 10);
-      if (reduceMotion || Number.isNaN(target)) { el.textContent = target; return; }
-      const start = target - 6 > 0 ? target - 6 : 0;
-      const duration = 900;
-      const startTime = performance.now();
-      const step = (now) => {
-        const t = Math.min(1, (now - startTime) / duration);
-        const eased = 1 - Math.pow(1 - t, 3);
-        el.textContent = Math.round(start + (target - start) * eased);
-        if (t < 1) requestAnimationFrame(step);
-        else el.textContent = target;
-      };
-      requestAnimationFrame(step);
+  const animateCount = (el, { from, duration = 900, onDone } = {}) => {
+    const target = parseInt(el.getAttribute('data-count-to'), 10);
+    if (reduceMotion || Number.isNaN(target)) { el.textContent = target; return; }
+    const start = from !== undefined ? from : (target - 6 > 0 ? target - 6 : 0);
+    const startTime = performance.now();
+    const step = (now) => {
+      // o 1º quadro pode vir com horário anterior a startTime — sem o max(0),
+      // o t negativo fazia o número cair abaixo do valor inicial
+      const t = Math.max(0, Math.min(1, (now - startTime) / duration));
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(start + (target - start) * eased);
+      if (t < 1) requestAnimationFrame(step);
+      else { el.textContent = target; if (onDone) onDone(); }
     };
-
+    requestAnimationFrame(step);
+  };
+  if (countEls.length) {
+    // Os anos do Currículo seguem a entrada do cabeçalho (abaixo); os demais
+    // (números das páginas de case) contam assim que aparecem na tela.
+    const otherCounts = [...countEls].filter((el) => !resumeHeader || !resumeHeader.contains(el));
     if ('IntersectionObserver' in window && !reduceMotion) {
       const countObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -96,7 +99,46 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       }, { threshold: 0.4 });
-      countEls.forEach((el) => countObserver.observe(el));
+      otherCounts.forEach((el) => countObserver.observe(el));
+    }
+  }
+
+  // --- Entrada do cabeçalho do Currículo (ver css/style.css) ---
+  // palavra + faixa, depois os números — que já saem contando do zero, junto
+  // com o início do deslize deles
+  if (resumeHeader) {
+    const resumeCounts = resumeHeader.querySelectorAll('.count[data-count-to]');
+    const COUNT_DELAY = 600;      // = transition-delay dos números no CSS
+    const COUNT_DURATION = 1400;  // um pouco além do deslize (1s), fecha logo depois de assentar
+    const countResumeYear = (el) => {
+      // reserva a largura do ano final enquanto conta (0 → 2019 vai de 1 a 4
+      // dígitos e, com a data alinhada à direita, o "de" ficaria pulando)
+      el.textContent = el.getAttribute('data-count-to');
+      el.style.display = 'inline-block';
+      el.style.textAlign = 'right';
+      el.style.minWidth = el.getBoundingClientRect().width + 'px';
+      el.textContent = '0';
+      animateCount(el, {
+        from: 0,
+        duration: COUNT_DURATION,
+        onDone: () => { el.style.minWidth = ''; el.style.display = ''; el.style.textAlign = ''; },
+      });
+    };
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      // já parte do zero, para os números não entrarem mostrando o ano final
+      resumeCounts.forEach((el) => { el.textContent = '0'; });
+      const headerObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            resumeHeader.classList.add('is-in');
+            setTimeout(() => resumeCounts.forEach(countResumeYear), COUNT_DELAY);
+            headerObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      headerObserver.observe(resumeHeader);
+    } else {
+      resumeHeader.classList.add('is-in');
     }
   }
 
