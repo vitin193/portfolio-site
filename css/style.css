@@ -2,18 +2,14 @@
    Gargi — Portfolio · Design tokens & base
    Fonte de verdade: Figma "gargiPortfolio2026" · frame "01 - Home"
 
-   Fontes:
+   Fontes (definitivas):
    - Satoshi: hospedada localmente (assets/fonts) — licença confirmada
      (Indian Type Foundry / Fontshare, uso comercial + web liberado).
-   - Typo Grotesk: AINDA NÃO embutida. Os arquivos que você mandou são
-     "_Demo" (uso pessoal/teste, sem direito de distribuição/web) e você
-     comentou que a licença completa ainda está em processo de compra.
-     Assim que a compra fechar e você mandar os arquivos definitivos,
-     troco os @font-face abaixo e é só isso — o resto do CSS já está
-     pronto pra receber a fonte real (tamanhos/tracking exatos do Figma
-     comentados ao lado de cada regra).
-   Até lá, uso "General Sans" (Fontshare, livre) como substituta visual
-   nos títulos grandes.
+   - Host Grotesk: hospedada localmente (assets/fonts), fonte de exibição
+     definitiva para títulos grandes — licença SIL Open Font License
+     (Google Fonts / Element Type), uso comercial + web liberado.
+     Fonte variável (var. weight axis 100–900), um único arquivo cobre
+     todos os pesos.
    =================================================================== */
 
 @font-face {
@@ -47,24 +43,16 @@
   font-weight: 900; font-style: normal; font-display: swap;
 }
 
-/* Quando a licença da Typo Grotesk estiver confirmada, descomente e aponte
-   pros arquivos definitivos (não-demo) em assets/fonts/:
 @font-face {
-  font-family: 'Typo Grotesk';
-  src: url('../assets/fonts/typo-grotesk-regular.woff2') format('woff2');
-  font-weight: 400; font-style: normal; font-display: swap;
+  font-family: 'Host Grotesk';
+  src: url('../assets/fonts/host-grotesk-variable.woff2') format('woff2-variations');
+  font-weight: 100 900; font-style: normal; font-display: swap;
 }
 @font-face {
-  font-family: 'Typo Grotesk';
-  src: url('../assets/fonts/typo-grotesk-bold.woff2') format('woff2');
-  font-weight: 700; font-style: normal; font-display: swap;
+  font-family: 'Host Grotesk';
+  src: url('../assets/fonts/host-grotesk-italic-variable.woff2') format('woff2-variations');
+  font-weight: 100 900; font-style: italic; font-display: swap;
 }
-@font-face {
-  font-family: 'Typo Grotesk Black';
-  src: url('../assets/fonts/typo-grotesk-black.woff2') format('woff2');
-  font-weight: 400; font-style: normal; font-display: swap;
-}
-*/
 
 :root {
   /* cores */
@@ -75,7 +63,7 @@
   --cream: #f9dc89;            /* texto sobre fundo escuro (currículo) */
   --red-pattern: #971f27;      /* PatternRed */
   --red-footer: #97291f;       /* fundo do footer */
-  --orange-pattern: rgba(255, 168, 45, 0.8); /* PatternOrange */
+  --orange-pattern: #FFB956;   /* PatternOrange — sólido, sem transparência */
   --curve-red: #971f27;        /* texto curvo "Design Systems..." */
 
   --accent-blue: #3d66a3;      /* tags Volkswagen */
@@ -83,7 +71,7 @@
   --accent-navy: #334676;      /* tags Peterson */
 
   /* tipografia */
-  --font-display: 'General Sans', 'Satoshi', sans-serif; /* placeholder p/ Typo Grotesk */
+  --font-display: 'Host Grotesk', 'Satoshi', sans-serif;
   --font-body: 'Satoshi', sans-serif;
 
   /* layout */
@@ -93,7 +81,10 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+/* overflow-x: clip (em vez de hidden) corta o vazamento horizontal sem transformar
+   html/body em contêiner de rolagem — com hidden nos dois, position: sticky
+   (header, títulos de seção) deixa de funcionar. hidden fica como fallback. */
+html { scroll-behavior: smooth; overflow-x: hidden; overflow-x: clip; }
 body {
   margin: 0;
   background: var(--paper-alt); /* F2F2F1 — o header e os cards ficam #FFFFFF por cima, criando o contraste */
@@ -101,6 +92,7 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden; /* contém o vazamento proposital do PatternOrange/PatternRed sem alargar a página */
+  overflow-x: clip;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -138,6 +130,8 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
 }
 .site-header__container {
   width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -218,12 +212,116 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
 }
 .lang-toggle[aria-pressed="true"] .lang-toggle__thumb { transform: translateX(26px); }
 
+/* --- Menu mobile (hambúrguer) — o botão é criado por main.js --- */
+.nav-toggle { display: none; }
+
+@media (max-width: 820px) {
+  .nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    margin-right: -10px;
+    padding: 10px;
+    background: none;
+    border: 0;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .nav-toggle__bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform .35s cubic-bezier(.16,.8,.3,1), opacity .2s ease;
+  }
+  .is-menu-open .nav-toggle__bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .is-menu-open .nav-toggle__bar:nth-child(2) { opacity: 0; }
+  .is-menu-open .nav-toggle__bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* Painel: ocupa a tela abaixo do header */
+  .js-nav .nav {
+    position: fixed;
+    top: var(--header-h);
+    left: 0; right: 0; bottom: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: 28px;
+    padding: 36px var(--gutter) 48px;
+    background: var(--paper);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity .3s ease, transform .35s cubic-bezier(.16,.8,.3,1), visibility 0s linear .35s;
+  }
+  .js-nav.is-menu-open .nav {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+  /* Itens entram em cascata */
+  .js-nav .nav > * {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .35s ease, transform .45s cubic-bezier(.16,.8,.3,1);
+  }
+  .js-nav.is-menu-open .nav > * { opacity: 1; transform: none; }
+  .js-nav.is-menu-open .nav > :nth-child(2) { transition-delay: .04s; }
+  .js-nav.is-menu-open .nav > :nth-child(3) { transition-delay: .08s; }
+  .js-nav.is-menu-open .nav > :nth-child(4) { transition-delay: .12s; }
+  .js-nav.is-menu-open .nav > :nth-child(5) { transition-delay: .16s; }
+
+  .js-nav .nav__link,
+  .js-nav .nav__button {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 1.1;
+  }
+  .js-nav .nav__badge { font-size: 11px; }
+  .js-nav .nav__icon-link .icon { width: 20px; height: 20px; }
+
+  /* "Projetos": a lista fica sempre aberta dentro do painel */
+  .js-nav .nav__item--dropdown { flex-direction: column; align-items: flex-start; gap: 0; }
+  .js-nav .nav__dropdown {
+    position: static;
+    width: auto;
+    padding-top: 14px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+  .js-nav .nav__dropdown ul {
+    background: none;
+    backdrop-filter: none;
+    padding: 0 0 0 4px;
+    gap: 12px;
+  }
+  .js-nav .nav__dropdown ul li { opacity: 1; transform: none; }
+  .js-nav .nav__dropdown a { font-size: 18px; }
+  .js-nav .lang-toggle { margin-top: 8px; }
+
+  html.is-menu-locked { overflow: hidden; }
+}
+
+@media (max-width: 820px) and (prefers-reduced-motion: reduce) {
+  .js-nav .nav, .js-nav .nav > *, .nav-toggle__bar { transition: none; }
+}
+
 /* ===================================================================
    Hero
    =================================================================== */
 .section-hero {
   position: relative;
-  padding: 40px var(--gutter);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 40px var(--gutter) 140px; /* mais respiro entre o título e os cases */
   overflow: visible;
 }
 
@@ -234,6 +332,9 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   font-weight: 700;
   color: var(--ink);
   margin: 0 0 8px;
+  /* matches block1's own font-size — needed so .curved-text (a direct child
+     used purely for em-based responsive sizing) inherits the right scale */
+  font-size: clamp(48px, 13.5vw, 194px);
 }
 
 /* Line 1+2 "Design de / Produto &" — Figma: 194px / line-height 149px */
@@ -256,8 +357,10 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   margin-top: 0.02em;
 }
 
-/* PatternOrange — a "tag" that circles the & (anchored to the & itself,
-   sized/offset in em so it tracks the glyph at any font-size/substitute font) */
+/* PatternOrange — highlight bar centered on the & glyph (vertically centered
+   via top:50%/translateY, so it tracks the glyph's own line box regardless
+   of font metrics) and bled out to the true right edge of the page — same
+   "past the page" language as the case cards below. */
 .amp-wrap {
   position: relative;
   display: inline-block;
@@ -271,27 +374,37 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
 .pattern-orange {
   position: absolute;
   left: -0.18em;
-  top: -0.22em;
-  width: 3.3em;
+  top: 50%;
+  width: 100vw;
   height: 0.85em;
   background: var(--orange-pattern);
   border-radius: 0.2em;
   z-index: 0;
+  transform: translateY(-50%);
+  transform-origin: left center;
 }
+
+/* Curved "wheel" — lives inside the hero heading (so its em-based size
+   tracks the heading's responsive font-size) but is unpinned from the &
+   and anchored instead to the heading's own right edge, bleeding out past
+   the page's right edge (clipped by body's overflow-x: hidden). Negative
+   z-index so it passes BEHIND both the orange badge and the heading
+   lettering, instead of sitting on top of them. */
 .curved-text {
   position: absolute;
-  left: 1.35em;
-  top: -0.75em;
-  width: 2em;
-  height: 2.02em;
+  top: -0.1em;
+  right: -1.1em;
+  width: 2.4em;
+  height: 2.4em;
   overflow: visible;
-  z-index: 1;
+  z-index: -1;
+  pointer-events: none;
 }
 .curved-text text {
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 39px;
-  letter-spacing: -2.5px;
+  letter-spacing: -1px;
   text-transform: uppercase;
   fill: var(--curve-red);
 }
@@ -310,16 +423,34 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
    Projects — case cards (identity: left edge glued to frame border,
    asymmetric right gap — same "bleed" language as PatternOrange/Red)
    =================================================================== */
-.section-projects { display: flex; flex-direction: column; }
+.section-projects {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-bottom: 100px; /* mais respiro entre os cases e o currículo */
+  /* quanto os cards precisam "vazar" pra esquerda pra alcançar a borda real
+     da janela (não só a borda do container centralizado) — 0 quando a
+     janela é mais estreita que --max-w, já que aí o container já encosta
+     na borda real e não há o que compensar. */
+  --edge-bleed: min(0px, calc((var(--max-w) - 100vw) / 2));
+}
 
-.case-card { padding: 24px 80px 24px 0; }
+.case-card { padding: 32px 80px 32px 0; }
 .case-card__inner {
   background: var(--paper);
   border-radius: 0 40px 40px 0;
   display: flex;
   gap: 48px;
   align-items: flex-start;
-  padding: 41px 90px 32px var(--gutter);
+  /* o vazamento vai só no retângulo/fundo visual (esse box), não no
+     .case-card em volta — por isso o padding-left cresce na mesma medida
+     que a margem negativa encolhe: o conteúdo (ícone/texto) continua
+     exatamente na mesma posição de antes, só o fundo branco que se estende
+     mais pra esquerda. Isso evita que o card "infle" de tamanho total. */
+  margin-left: var(--edge-bleed);
+  width: calc(100% - var(--edge-bleed));
+  padding: 41px 90px 32px calc(var(--gutter) - var(--edge-bleed));
   min-height: 300px;
 }
 .case-card__brand { display: flex; flex-direction: column; gap: 15px; flex-shrink: 0; }
@@ -378,27 +509,38 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
    Currículo (resume)
    =================================================================== */
 .section-resume {
-  background: var(--ink);
-  padding: 0 var(--gutter);
+  background: var(--ink); /* fundo sempre full-bleed, sem max-width aqui */
   color: var(--cream);
 }
 .section-resume__container {
+  /* mesma estrutura do .section-hero: centraliza E aplica o gutter no
+     mesmo elemento — antes o gutter era aplicado no .section-resume (full
+     width) e só depois centralizava por dentro, o que gerava um inset
+     diferente do resto da página sempre que a tela é mais larga que
+     --max-w + gutters. Não mexe em nada da faixa/tag, que usa left:-100vw
+     relativo ao próprio .resume-daterange, independente desse padding. */
   position: relative;
-  padding: 112px 0;
-}
-.pattern-red {
-  position: absolute;
-  left: -235px;
-  top: 281px;
-  width: 940px;
-  height: 95px;
-  background: var(--red-pattern);
-  border-radius: 0 20px 20px 0;
-  z-index: 0;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 112px var(--gutter);
 }
 
-.resume-header { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 20px; }
+.resume-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* sem isso, o flex esticava heading E faixa pra
+                               largura toda do container (causa raiz do
+                               "Currículo" e da medição em JS saírem errados) */
+  gap: 0;
+  /* setado pelo main.js com a largura real renderizada de .resume-heading
+     ("Currículo"), pra faixa terminar exatamente no fim da palavra —
+     mantido como fallback até o JS rodar */
+  --resume-stripe-w: 320px;
+}
 .resume-heading {
+  display: inline-block;
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(72px, 13.5vw, 194px);
@@ -406,16 +548,39 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   line-height: 1.02;
   color: var(--cream);
 }
+/* PatternRed — largura travada no fim de "Currículo" (--resume-stripe-w),
+   data alinhada à direita com 42px de margem até a ponta da tag, ponta
+   arredondada à direita e sangrando pela esquerda (bem além da borda real
+   da página). */
 .resume-daterange {
+  position: relative;
   display: flex;
+  align-self: flex-start; /* .resume-header é flex-column e por padrão
+                              esticava esse item pra largura toda */
   align-items: center;
+  justify-content: flex-end;
   gap: 18px;
+  padding-right: 42px;
+  width: var(--resume-stripe-w);
   font-family: var(--font-body);
   font-weight: 400;
   font-size: clamp(36px, 5.5vw, 80px);
   letter-spacing: -0.08em;
   color: var(--cream);
 }
+.resume-daterange::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -100vw;
+  right: 0;
+  transform: translateY(-50%);
+  height: 1.2em;
+  border-radius: 0 20px 20px 0;
+  background: var(--red-pattern);
+  z-index: 0;
+}
+.resume-daterange > * { position: relative; z-index: 1; }
 
 .resume-list { position: relative; z-index: 1; padding-top: 40px; }
 .resume-item {
@@ -484,7 +649,7 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 107px 86.39px;
+  padding: 107px var(--gutter); /* same side inset as hero/cases/résumé */
   flex-wrap: wrap;
   gap: 40px;
 }
@@ -518,8 +683,8 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
 }
 .js-hero-in.is-in { opacity: 1; transform: translateY(0); }
 /* o badge laranja some/some-a-aparecer junto, mas não deve mover o & — só o próprio badge */
-.pattern-orange.js-hero-in { transform: scale(.85); transform-origin: left center; }
-.pattern-orange.js-hero-in.is-in { transform: scale(1); }
+.pattern-orange.js-hero-in { transform: translateY(-50%) scale(.85); transform-origin: left center; }
+.pattern-orange.js-hero-in.is-in { transform: translateY(-50%) scale(1); }
 
 /* Texto curvo: rotação lenta e contínua */
 @media (prefers-reduced-motion: no-preference) {
@@ -611,6 +776,8 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
 @media (max-width: 900px) {
   :root { --gutter: 32px; }
   .nav { gap: 20px; flex-wrap: wrap; }
+  .section-hero { padding-bottom: 72px; }
+  .section-projects { padding-bottom: 56px; }
   .case-card { padding: 16px 24px 16px 0; }
   .case-card__inner { flex-direction: column; padding: 32px; gap: 24px; }
   .case-card__view { position: static; margin-top: 16px; }

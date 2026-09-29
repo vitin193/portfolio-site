@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volkswagen Caminhões e Ônibus — Gargi</title>
+<meta name="description" content="Case study: como transformei dados fragmentados de frota em uma única experiência de comparação para a Volkswagen Caminhões e Ônibus.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/case.css">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header site-header--case">
+  <div class="site-header__container">
+    <a href="/" class="logo">
+      <img src="assets/images/logo-header-ink.png" alt="Gargi" width="86" height="40">
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="/" class="nav__link">Início</a>
+
+      <div class="nav__item nav__item--dropdown">
+        <button class="nav__button" aria-expanded="false" aria-controls="projects-menu">
+          Projetos <span class="nav__badge">3</span>
+        </button>
+        <div class="nav__dropdown" id="projects-menu">
+          <ul>
+            <li><a href="/#volkswagen">Somapay PF</a></li>
+            <li><a href="/#volkswagen">Crédito do Trabalhador</a></li>
+            <li><a href="case-claro.html">Somapay PJ</a></li>
+            <li><a href="case-peterson.html">Petco VetPoint</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="nav__item">
+        <a href="/#curriculo" class="nav__link">Currículo</a>
+        <a href="assets/cv-victor-gargi.pdf" class="nav__icon-link" aria-label="Baixar currículo em PDF" download>
+          <svg class="icon icon--download" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <a href="/#footer" class="nav__link">Contato</a>
+
+      <button class="lang-toggle" id="langToggle" type="button" aria-pressed="false" aria-label="Mudar idioma para inglês">
+        <span class="lang-toggle__label">EN-US</span>
+        <span class="lang-toggle__track"><span class="lang-toggle__thumb"></span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="case-hero case-section--vw-light cs-hero">
+    <div class="case-section__inner">
+      <img class="case-hero__logo" src="assets/images/logo-volkswagen-hero.png" alt="Volkswagen" width="317" height="80">
+      <h1 class="case-hero__title">Transformando dados fragmentados em uma experiência única de comparação</h1>
+      <p class="case-hero__subtitle">Gestores de frota já tinham acesso a uma grande quantidade de dados sobre veículos, rotas e motoristas. O problema era que essas informações estavam espalhadas por diferentes plataformas.</p>
+    </div>
+  </section>
+
+  <section class="case-section case-section--vw-midnight cs-intro">
+    <div class="case-section__inner case-intro">
+      <div class="case-blocks">
+        <div class="case-block case-block--spaced">
+          <h2 class="case-block__heading">Contexto</h2>
+          <p>A Volkswagen Caminhões e Ônibus utiliza o ecossistema RIO para acompanhar diferentes aspectos da operação de uma frota.</p>
+          <p class="cs-tight">Dados sobre comportamento de motoristas, veículos, rotas e eficiência operacional já estavam disponíveis, mas distribuídos entre diferentes plataformas e dashboards.</p>
+        </div>
+        <div class="case-block">
+          <h2 class="case-block__heading">O desafio</h2>
+          <p>Para um gestor de frota construir uma visão completa, era necessário navegar entre diferentes frentes do produto, interpretar informações separadamente e conectar os dados mentalmente. O gestor tinha acesso aos dados, mas não necessariamente à relação entre eles.</p>
+          <p>Informações sobre o perfil de um motorista podiam estar em uma plataforma. Dados relacionados às rotas estavam em outra. Informações de comportamento e performance dos veículos apareciam em outros dashboards. Isso dificultava responder perguntas importantes para a operação.</p>
+        </div>
+        <div class="case-block case-block--spaced">
+          <h2 class="case-block__heading">O que eu fiz</h2>
+          <p>Participei das sessões de discovery e co-criação com diretores e stakeholders da Volkswagen, transformando discussões estratégicas em fluxos e hipóteses de produto. Fui responsável pela evolução da arquitetura da experiência, criação de wireframes, validação de hipóteses com Engenharia, levantamento da disponibilidade real dos dados e definição da interface final.</p>
+        </div>
+        <div class="case-block">
+          <h2 class="case-block__heading">O resultado</h2>
+          <p>A solução criou uma nova experiência de comparação baseada em quatro pilares principais: Rota · Modelo · Veículo · Motorista.</p>
+          <p class="cs-tight">O projeto foi aprovado pela diretoria, avançou para produção e tornou-se uma referência para novas experiências dentro do produto.</p>
+        </div>
+      </div>
+      <h2 class="case-kicker case-kicker--sticky case-kicker--sticky-mobile">Intro</h2>
+    </div>
+  </section>
+
+  <section class="case-section case-section--vw-teal cs-dados">
+    <div class="case-section__inner">
+      <div class="case-split">
+        <h2 class="case-kicker case-kicker--sticky">Dados</h2>
+        <div class="case-split__text">
+          <p>O problema não era falta de informação.</p>
+          <p>Nas primeiras discussões sobre o produto, ficou claro que a Volkswagen já possuía uma grande quantidade de dados. O desafio era entender quais informações realmente poderiam trabalhar juntas.</p>
+          <p>Os dados vinham de diferentes plataformas de telemetria e acompanhamento operacional, todas relacionadas ao comportamento de veículos e motoristas.</p>
+          <p>Entre os indicadores disponíveis estavam:</p>
+          <p>EPK, excesso de velocidade, faixa verde, freada brusca, consumo, arrancada, aceleração brusca, emissões, excesso de marcha lenta + AC, tempo de ociosidade, excesso de RPM, embreagem e velocidade média.</p>
+          <p>Mas disponibilidade de dados não significa facilidade de análise.</p>
+        </div>
+      </div>
+      <div class="case-stats-row">
+        <div class="case-stat">
+          <span class="case-stat__number">4</span>
+          <p class="case-stat__label">pilares conectados</p>
+        </div>
+        <div class="case-stat">
+          <span class="case-stat__number">+10</span>
+          <p class="case-stat__label">fluxos explorados</p>
+        </div>
+        <div class="case-stat">
+          <span class="case-stat__number">13</span>
+          <p class="case-stat__label">indicadores analisados</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section case-section--vw-ivory cs-desafio">
+    <div class="case-section__inner case-split case-split--reverse">
+      <h2 class="case-kicker case-kicker--sticky">Desafio</h2>
+      <ol class="case-numbered-list">
+        <li>
+          <span class="case-numbered-list__index">01</span>
+          <div>
+            <h3 class="case-numbered-list__heading">Ordem dos Pilares</h3>
+            <p>A ordem dos pilares passou por várias versões. Diferentes pontos de entrada pareciam dar mais liberdade, mas criavam uma nova decisão antes mesmo da análise começar.</p>
+          </div>
+        </li>
+        <li>
+          <span class="case-numbered-list__index">02</span>
+          <div>
+            <h3 class="case-numbered-list__heading">Flexibilidade Demais</h3>
+            <p>Por onde devo começar? Qual dado selecionar primeiro? A experiência tinha flexibilidade demais antes de estabelecer contexto.</p>
+          </div>
+        </li>
+        <li>
+          <span class="case-numbered-list__index">03</span>
+          <div>
+            <h3 class="case-numbered-list__heading">Guiado, Mas Não Restritivo</h3>
+            <p>A rota se tornou o ponto de partida obrigatório: Rota → Modelo → Veículo e/ou Motorista, sem tornar o fluxo um caminho rígido.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="case-section case-section--vw-ocean cs-solucao">
+    <div class="case-section__inner">
+      <h2 class="case-kicker">Solução</h2>
+
+      <div class="case-pillars">
+        <div class="case-pillar">
+          <h3 class="case-pillar__heading">Discovery e Co-criação</h3>
+          <div class="case-pillar__text">
+            <p>As sessões de discovery reuniram diretores da Volkswagen, stakeholders, Engenharia, time de requisitos e Design para alinhar as definições.</p>
+            <p>A definição da experiência considerou necessidades dos usuários, pesquisas anteriores da empresa e a disponibilidade real dos dados nas plataformas.</p>
+          </div>
+          <div class="case-carousel" tabindex="0" role="region" aria-label="Wireframes do fluxo de seleção">
+            <img src="assets/images/case-volkswagen/wireframe-rota-2.png" alt="Wireframe — seleção da rota com mapa em destaque" width="750" height="400" loading="lazy">
+            <img src="assets/images/case-volkswagen/wireframe-rota-1.png" alt="Wireframe — seleção da rota em grade" width="750" height="400" loading="lazy">
+            <img src="assets/images/case-volkswagen/wireframe-motorista.png" alt="Wireframe — seleção do motorista" width="750" height="400" loading="lazy">
+          </div>
+        </div>
+        <div class="case-pillar">
+          <h3 class="case-pillar__heading">Rota como Ponto de Partida</h3>
+          <div class="case-pillar__text">
+            <p>A rota passou a funcionar como o contexto inicial da análise. A partir dela, o fluxo avançava progressivamente — Rota → Modelo → Veículo e/ou Motorista — reduzindo os caminhos possíveis sem tornar a experiência rígida.</p>
+            <p>O usuário podia encerrar a configuração após o veículo, ou aprofundar a leitura incluindo o motorista.</p>
+          </div>
+          <div class="case-carousel case-carousel--gap-50" tabindex="0" role="region" aria-label="Telas finais do comparativo">
+            <img src="assets/images/case-volkswagen/1.png" alt="Tela de seleção de parâmetros do comparativo — Rota, Modelo, Veículo, Motorista" width="691" height="400" loading="lazy">
+            <img src="assets/images/case-volkswagen/2.png" alt="Tela de seleção da rota com mapa" width="596" height="400" loading="lazy">
+            <img src="assets/images/case-volkswagen/5.png" alt="Tela de seleção de motoristas" width="609" height="398" loading="lazy">
+            <img src="assets/images/case-volkswagen/4.png" alt="Tela de seleção de veículos" width="609" height="398" loading="lazy">
+            <img src="assets/images/case-volkswagen/3.png" alt="Tela de seleção do modelo de veículo" width="601" height="400" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-project">
+        <h3 class="case-pillar__heading">Conheça o projeto</h3>
+        <div class="case-project-card" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section case-section--vw-teal-inv cs-impacto">
+    <div class="case-section__inner case-split">
+      <div class="case-split__text">
+        <p>A falta de conexão entre os dados dificultava responder perguntas essenciais da operação — qual motorista precisa de orientação, quais padrões impactam a eficiência, como cada veículo performa em diferentes contextos.</p>
+        <p>Isso deixou claro que o problema não era de usabilidade isolada, mas um risco real para a tomada de decisão operacional — o que tornou a nova experiência uma prioridade estratégica.</p>
+      </div>
+      <h2 class="case-kicker">Impacto</h2>
+    </div>
+  </section>
+
+  <section class="case-section case-section--vw-midnight case-disclosure cs-disclosure">
+    <div class="case-section__inner">
+      <p>Este case study contém informações de projetos desenvolvidos sob acordos de confidencialidade (NDA). Alguns detalhes sensíveis foram alterados ou omitidos para respeitar esses compromissos. O conteúdo apresentado aqui reflete minhas próprias análises e contribuições e não representa necessariamente a posição oficial das empresas envolvidas.</p>
+      <p class="case-thanks">Obrigado pelo seu tempo!</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="footer">
+  <div class="site-footer__container">
+    <a href="/" class="logo logo--footer">
+      <img src="assets/images/logo-footer.png" alt="Gargi" width="127" height="60" onerror="this.style.opacity=0">
+    </a>
+
+    <div class="footer-contact">
+      <button class="footer-contact__item" id="copyEmail" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>hello@gargidesign.com</span>
+      </button>
+      <a class="footer-contact__item" href="https://wa.me/5511967204035" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 3.5A10.4 10.4 0 0012 0 10.5 10.5 0 001.6 14.8L0 21l6.4-1.6A10.5 10.5 0 0012 21a10.4 10.4 0 008.5-4.4A10.4 10.4 0 0022 12a10.4 10.4 0 00-1.5-8.5zM12 19a8 8 0 01-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1120 12a8 8 0 01-8 7z" fill="currentColor"/></svg>
+        <span>+55 (11) 96720 4035</span>
+      </a>
+      <a class="footer-contact__item" href="https://www.linkedin.com/in/victor-gargi/" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7 10v7M7 7v.01M12 17v-4.5a2 2 0 014 0V17M12 10v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Victor Gargi</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/case-motion.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peterson Solutions — Gargi</title>
+<meta name="description" content="Case study: how I simplified a B2B journey inside a highly complex legacy system for Peterson Solutions.">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/case.css">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header site-header--case">
+  <div class="site-header__container">
+    <a href="/en/" class="logo">
+      <img src="../assets/images/logo-header-ink.png" alt="Gargi" width="86" height="40">
+    </a>
+
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/en/" class="nav__link">Home</a>
+
+      <div class="nav__item nav__item--dropdown">
+        <button class="nav__button" aria-expanded="false" aria-controls="projects-menu">
+          Projects <span class="nav__badge">3</span>
+        </button>
+        <div class="nav__dropdown" id="projects-menu">
+          <ul>
+            <li><a href="/en/#volkswagen">Somapay PF</a></li>
+            <li><a href="/en/#volkswagen">Worker Credit Line</a></li>
+            <li><a href="case-claro.html">Somapay PJ</a></li>
+            <li><a href="case-peterson.html">Petco VetPoint</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="nav__item">
+        <a href="/en/#curriculo" class="nav__link">Resume</a>
+        <a href="../assets/cv-victor-gargi.pdf" class="nav__icon-link" aria-label="Download résumé PDF" download>
+          <svg class="icon icon--download" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <a href="/en/#footer" class="nav__link">Contact</a>
+
+      <button class="lang-toggle" id="langToggle" type="button" aria-pressed="true" aria-label="Switch language to Portuguese">
+        <span class="lang-toggle__label">PT-BR</span>
+        <span class="lang-toggle__track"><span class="lang-toggle__thumb"></span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="case-hero case-section--black cs-hero cu-hero">
+    <div class="case-section__inner">
+      <img class="case-hero__logo" src="../assets/images/logo-peterson-hero.png" alt="Peterson Solutions" width="309" height="41">
+      <h1 class="case-hero__title">How do you simplify a B2B journey inside a highly complex legacy system?</h1>
+      <p class="case-hero__subtitle">I redesigned the certification flows, kickstarted the company's foundational design system, and structured the hand-off process with the development team.</p>
+    </div>
+  </section>
+
+  <section class="case-section case-section--navy cs-intro cu-intro">
+    <div class="case-section__inner case-intro">
+      <div class="case-blocks">
+        <div class="case-block">
+          <h2 class="case-block__heading">Context</h2>
+          <p>Peterson Solutions certifies processes in agribusiness. The system was used daily by auditors, technicians, and managers with very different routines and experience levels.</p>
+        </div>
+        <div class="case-block">
+          <h2 class="case-block__heading">The challenge</h2>
+          <p>The project came about because the operational cost had become visible: an overloaded support team, difficulty retaining auditors, and a slow development cycle due to the lack of reusable components.</p>
+          <p>The main certification process required 47 clicks and 23 minutes. Not because the process itself was complex, but because the interface didn't follow the logic of the person performing the task.</p>
+        </div>
+        <div class="case-block">
+          <h2 class="case-block__heading">What I did</h2>
+          <p>I redesigned the flow in the order the user thinks, not the order the system was built. The design system was defined before any high-fidelity screen. There was pressure to show visual progress quickly, but without established tokens and components, any interface produced would be inconsistent with what engineering was already building in parallel.</p>
+        </div>
+        <div class="case-block">
+          <h2 class="case-block__heading">The result</h2>
+          <p>Satisfaction from 2.1 to 4.2. Support tickets from 87 to 23 per month. Main process completion time with 62% fewer clicks. New feature implementation time from 3 weeks to 2 weeks.</p>
+        </div>
+      </div>
+      <h2 class="case-kicker case-kicker--sticky case-kicker--sticky-mobile">Intro</h2>
+    </div>
+  </section>
+
+  <section class="case-section case-section--cream-ink cs-dados">
+    <div class="case-section__inner">
+      <div class="case-split">
+        <h2 class="case-kicker case-kicker--sticky">Data</h2>
+        <div class="case-split__text">
+          <p>The research was done together with the requirements team, which conducted user interviews, and through collaborative sessions with stakeholders where this material was analyzed.</p>
+          <p>Two points shaped the project from there.</p>
+          <p>The problem wasn't the number of clicks. It was the lack of feedback during the process. Users didn't know if they'd done something right until they hit an error a few steps later.</p>
+          <p>The second point was about profiles. Experienced auditors and technicians in training performed the same task with completely different mental models. The interface ignored this and treated both the same way.</p>
+        </div>
+      </div>
+      <div class="case-stats-row">
+        <div class="case-stat">
+          <span class="case-stat__number">47</span>
+          <p class="case-stat__label">clicks on the main process</p>
+        </div>
+        <div class="case-stat">
+          <span class="case-stat__number">23 min</span>
+          <p class="case-stat__label">average time to complete registration</p>
+        </div>
+        <div class="case-stat">
+          <span class="case-stat__number">2.1/5</span>
+          <p class="case-stat__label">initial satisfaction</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section case-section--navy cs-desafio cu-problema">
+    <div class="case-section__inner case-split case-split--reverse">
+      <h2 class="case-kicker case-kicker--sticky">Problem</h2>
+      <ol class="case-numbered-list">
+        <li>
+          <span class="case-numbered-list__index">01</span>
+          <div>
+            <h3 class="case-numbered-list__heading">Complicated, Lengthy Flows</h3>
+            <p>The certification process required an average of 47 clicks and 23 minutes to complete, with a high rate of errors and rework due to a lack of contextual validation and clear feedback.</p>
+          </div>
+        </li>
+        <li>
+          <span class="case-numbered-list__index">02</span>
+          <div>
+            <h3 class="case-numbered-list__heading">Legacy, Confusing Interface</h3>
+            <p>Users reported only 2.1/5 satisfaction. Main complaints: difficulty finding features and understanding process status.</p>
+          </div>
+        </li>
+        <li>
+          <span class="case-numbered-list__index">03</span>
+          <div>
+            <h3 class="case-numbered-list__heading">No Standardization</h3>
+            <p>Without a design system, development created components in isolation, generating visual inconsistencies that made the code harder to maintain.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="case-section case-section--purple cs-solucao cu-solucao">
+    <div class="case-section__inner">
+      <h2 class="case-kicker">Solution</h2>
+      <p class="cu-solucao__lead">Three fundamental pillars that transformed the product experience and the team's efficiency.</p>
+
+      <div class="case-pillars">
+        <div class="case-pillar">
+          <h3 class="case-pillar__heading">Mapping with the requirements team</h3>
+          <div class="case-pillar__text">
+            <p>There were several conversations, facilitated sessions, and meetings with the requirements team and stakeholders to align on business definitions.</p>
+            <p>Understanding the journey from the user's perspective became the deciding factor when defining the function/task each screen was meant to accomplish.</p>
+          </div>
+          <div class="case-pillar__media">
+            <img src="../assets/images/case-peterson/1.png" alt="Collaborative mapping with the requirements team — flows and components" loading="lazy">
+          </div>
+        </div>
+        <div class="case-pillar">
+          <h3 class="case-pillar__heading">Flow Simplification</h3>
+          <div class="case-pillar__text">
+            <p>I completely restructured the certification flows, rebuilding the journey understanding at the wireframe stage, cutting unnecessary steps, and reorganizing information based on users' mental models.</p>
+            <p>The main process was reduced from 47 to 18 clicks, with clear visual hierarchy and contextual feedback at every step.</p>
+          </div>
+          <div class="case-pillar__media">
+            <img src="../assets/images/case-peterson/2.png" alt="Simplification of certification flows" loading="lazy">
+          </div>
+        </div>
+        <div class="case-pillar">
+          <h3 class="case-pillar__heading">Structured Hand-off Process</h3>
+          <div class="case-pillar__text">
+            <p>I created a hand-off process that transformed collaboration between design and development, with detailed technical spec documentation and production-ready organized assets.</p>
+            <p>Weekly alignment meetings between design and engineering reduced rework by 71% and sped up the implementation of new screens.</p>
+          </div>
+          <div class="case-pillar__media">
+            <img src="../assets/images/case-peterson/3.png" alt="Structured hand-off process between design and development" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section case-section--blue cs-impacto">
+    <div class="case-section__inner case-split">
+      <div class="case-split__text">
+        <p>The problematic experience resulted in falling user productivity, a significant increase in support tickets (averaging 87/month), difficulty hiring and retaining auditors, and a slower development cycle due to the lack of reusable components and clear guidelines.</p>
+        <p>These numbers made it clear the problem wasn't just usability — it was a direct risk to the business, which is what made the redesign a strategic priority for the company.</p>
+      </div>
+      <h2 class="case-kicker">Impact</h2>
+    </div>
+  </section>
+
+  <section class="case-section case-section--navy cu-resultados">
+    <div class="case-section__inner">
+      <h2 class="cu-resultados__title">Measurable Results</h2>
+      <div class="case-result-cards">
+        <div class="case-result-card case-result-card--row">
+          <div class="case-result-card__icon"><span class="cu-icon" aria-hidden="true"><span class="cu-icon__part" style="inset: 25% 33.33% 41.67% 50%"><span class="cu-icon__bleed" style="inset: -12.5% -25.01% -12.5% -25%"><img src="../assets/images/case-peterson/icons/clock-a.svg" alt=""></span></span><span class="cu-icon__part" style="inset: 8.34% 8.33% 8.32% 8.34%"><span class="cu-icon__bleed" style="inset: -5%"><img src="../assets/images/case-peterson/icons/clock-b.svg" alt=""></span></span></span></div>
+          <div class="case-result-card__body">
+            <span class="case-result-card__number">-62%</span>
+            <div class="case-result-card__text">
+              <h3 class="case-result-card__title">Task Completion Time</h3>
+              <p class="case-result-card__desc">Optimized flows drastically reduced the time needed to complete main processes.</p>
+            </div>
+          </div>
+        </div>
+        <div class="case-result-card">
+          <div class="case-result-card__icon"><span class="cu-icon" aria-hidden="true"><span class="cu-icon__part" style="inset: 29.16% 8.33% 45.84% 66.67%"><span class="cu-icon__bleed" style="inset: -16.67%"><img src="../assets/images/case-peterson/icons/trend-a.svg" alt=""></span></span><span class="cu-icon__part" style="inset: 29.16% 8.33% 29.18% 8.34%"><span class="cu-icon__bleed" style="inset: -10% -5%"><img src="../assets/images/case-peterson/icons/trend-b.svg" alt=""></span></span></span></div>
+          <div class="case-result-card__body">
+            <span class="case-result-card__number">+58%</span>
+            <div class="case-result-card__text">
+              <h3 class="case-result-card__title">Development Speed</h3>
+              <p class="case-result-card__desc">Reduction in the time to implement new features thanks to the design system and reusable components.</p>
+            </div>
+          </div>
+        </div>
+        <div class="case-result-card">
+          <div class="case-result-card__icon"><span class="cu-icon" aria-hidden="true"><span class="cu-icon__part" style="inset: 8.34% 8.33% 12.19% 8.33%"><span class="cu-icon__bleed" style="inset: -5.24% -5%"><img src="../assets/images/case-peterson/icons/star.svg" alt=""></span></span></span></div>
+          <div class="case-result-card__body">
+            <span class="case-result-card__number">4.2/5</span>
+            <div class="case-result-card__text">
+              <h3 class="case-result-card__title">User Satisfaction</h3>
+              <p class="case-result-card__desc">Increase from 2.1 to 4.2 in end-user satisfaction after the redesign.</p>
+            </div>
+          </div>
+        </div>
+        <div class="case-result-card">
+          <div class="case-result-card__icon"><span class="cu-icon" aria-hidden="true"><span class="cu-icon__part" style="inset: 12.44% 8.34% 12.5% 8.26%"><span class="cu-icon__bleed" style="inset: -5.55% -5%"><img src="../assets/images/case-peterson/icons/alert-a.svg" alt=""></span></span><span class="cu-icon__part" style="inset: 37.5% 50% 45.83% 50%"><span class="cu-icon__bleed" style="inset: -25% -1.17px"><img src="../assets/images/case-peterson/icons/alert-b.svg" alt=""></span></span><span class="cu-icon__part" style="inset: 70.84% 49.96% 29.16% 50%"><span class="cu-icon__bleed" style="inset: -1.17px -9971.77%"><img src="../assets/images/case-peterson/icons/alert-c.svg" alt=""></span></span></span></div>
+          <div class="case-result-card__body">
+            <span class="case-result-card__number">-71%</span>
+            <div class="case-result-card__text">
+              <h3 class="case-result-card__title">Development Rework</h3>
+              <p class="case-result-card__desc">Clear documentation and a structured hand-off minimized post-implementation adjustments and fixes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section case-section--black case-disclosure cs-disclosure">
+    <div class="case-section__inner">
+      <p>This case study contains information from projects developed under non-disclosure agreements (NDAs). Some sensitive details have been altered or omitted to respect these commitments. The content presented here reflects my own analysis and contributions and does not necessarily represent the official position of the companies involved.</p>
+      <p class="case-thanks">Thank you for your time!</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="footer">
+  <div class="site-footer__container">
+    <a href="/en/" class="logo logo--footer">
+      <img src="../assets/images/logo-footer.png" alt="Gargi" width="127" height="60" onerror="this.style.opacity=0">
+    </a>
+
+    <div class="footer-contact">
+      <button class="footer-contact__item" id="copyEmail" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>hello@gargidesign.com</span>
+      </button>
+      <a class="footer-contact__item" href="https://wa.me/5511967204035" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 3.5A10.4 10.4 0 0012 0 10.5 10.5 0 001.6 14.8L0 21l6.4-1.6A10.5 10.5 0 0012 21a10.4 10.4 0 008.5-4.4A10.4 10.4 0 0022 12a10.4 10.4 0 00-1.5-8.5zM12 19a8 8 0 01-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1120 12a8 8 0 01-8 7z" fill="currentColor"/></svg>
+        <span>+55 (11) 96720 4035</span>
+      </a>
+      <a class="footer-contact__item" href="https://www.linkedin.com/in/victor-gargi/" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7 10v7M7 7v.01M12 17v-4.5a2 2 0 014 0V17M12 10v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Victor Gargi</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/case-motion.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -26,29 +26,9 @@
   --case-cream: #f2f2f1;
 }
 
-/* --- Header overlay (transparente sobre o hero escuro) --- */
-.case-header {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  z-index: 10;
-  background: transparent;
-}
-.case-header .site-header__container { background: transparent; }
-.case-header .nav__link,
-.case-header .nav__button,
-.case-header .lang-toggle__label,
-.case-header .logo,
-.case-header .nav__link::after,
-.case-header .nav__button::after { color: var(--case-cream); }
-.case-header .logo img { filter: brightness(0) invert(1); }
-.case-header .nav__badge { background: var(--case-cream); color: var(--case-navy); }
-.case-header .icon { color: var(--case-cream); }
-.case-header .nav__dropdown { background: var(--case-cream); }
-.case-header .nav__dropdown a { color: var(--case-navy); }
-
 /* --- Hero --- */
 .case-hero {
-  padding: 190px var(--gutter) 90px;
+  padding: 126px var(--gutter) 90px; /* 190 do layout antigo − 64 do header, que agora ocupa espaço */
   color: var(--case-cream);
 }
 .case-hero__logo { height: 41px; width: auto; margin-bottom: 56px; opacity: .95; }
@@ -91,7 +71,7 @@
 .case-kicker {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(40px, 7vw, 110px);
+  font-size: clamp(40px, 7.2vw, 115.2px);
   line-height: 0.92;
   margin: 0;
 }
@@ -189,6 +169,54 @@
   max-width: 680px;
 }
 
+/* --- Imagens de produto (Volkswagen: telas do produto RIO) --- */
+.case-image-full {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 56px;
+}
+.case-image-full img { width: 100%; display: block; }
+
+.case-image-grid {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+.case-image-grid img {
+  flex: 1 1 260px;
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+}
+.case-image-grid--3 img { flex-basis: 30%; }
+
+/* --- CTA dentro de seção de case (herda a cor do texto da seção) --- */
+.case-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  padding: 13px 30px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: inherit;
+  transition: background-color .25s ease, color .25s ease;
+}
+.case-cta:hover { background: currentColor; }
+.case-section--navy .case-cta:hover,
+.case-section--black .case-cta:hover,
+.case-section--purple .case-cta:hover,
+.case-section--red-deep .case-cta:hover,
+.case-section--red-bright .case-cta:hover { color: var(--case-navy); }
+.case-section--cream .case-cta:hover,
+.case-section--terracotta .case-cta:hover,
+.case-section--blue .case-cta:hover { color: var(--case-cream); }
+
 /* --- Pilares com imagem (Solução) --- */
 .case-pillars { display: flex; flex-direction: column; gap: 90px; margin-top: 60px; }
 .case-pillar__heading {
@@ -276,8 +304,8 @@
 }
 .case-role-list__heading {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 24px;
+  font-weight: 800;
+  font-size: 27px;
   margin: 0 0 12px;
 }
 .case-role-list p {
@@ -363,15 +391,500 @@
   );
 }
 
+/* ===================================================================
+   Volkswagen — frame "01 - Volkswagen" (node 199:341)
+   Paleta própria do case; não altera as classes usadas por Claro/Peterson.
+   =================================================================== */
+:root {
+  --vw-light: #f2f2f1;
+  --vw-midnight: #1f2f57;
+  --vw-teal: #00919e;
+  --vw-ivory: #fdfaf9;
+  --vw-ocean: #1b4f84;
+  --vw-ink: #171a31;
+  --vw-card: #303030;
+}
+
+/* Header sólido (Figma node 441:35): o padrão do site, com o logo "Azul 2" 86×40 */
+.site-header--case .logo img { height: 40px; }
+
+.case-section--vw-light    { background: var(--vw-light); color: var(--vw-ink); }
+.case-section--vw-midnight { background: var(--vw-midnight); color: var(--vw-light); }
+.case-section--vw-teal     { background: var(--vw-teal); color: var(--vw-ink); }
+.case-section--vw-teal-inv { background: var(--vw-teal); color: var(--vw-ivory); }
+.case-section--vw-ivory    { background: var(--vw-ivory); color: var(--ink); }
+.case-section--vw-ocean    { background: var(--vw-ocean); color: var(--vw-light); }
+
+/* Hero */
+.cs-hero { padding: 184px var(--gutter) 146px; }
+/* O logo usa o tamanho do próprio arquivo (VW 317×80, Peterson 309×41 — iguais ao Figma) */
+.cs-hero .case-hero__logo { display: block; width: auto; max-width: 100%; height: auto; margin: 0 0 23px; opacity: 1; }
+.cs-hero .case-hero__title { max-width: 1130px; font-size: clamp(32px, 6.4vw, 92px); line-height: 0.98; margin-bottom: 21px; }
+.cs-hero .case-hero__subtitle { max-width: 1130px; }
+
+/* Intro */
+.cs-intro { padding: 160px var(--gutter) 120px; }
+.cs-intro .case-blocks { gap: 69px; }
+.cs-intro .case-block__heading { line-height: 1.2; margin-bottom: 17px; }
+.cs-intro .case-block p { line-height: 1; letter-spacing: 0.006em; }
+.cs-intro .case-block p + p { margin-top: 17px; }
+.cs-intro .case-block p.cs-tight { margin-top: 0; }
+.cs-intro .case-block--spaced { padding-bottom: 20px; } /* linha em branco no Figma */
+.cs-intro .case-kicker { opacity: .95; }
+
+/* Dados */
+.cs-dados { padding: 110px var(--gutter) 150px; }
+.cs-dados .case-split { gap: 70px; }
+.cs-dados .case-split { min-height: 350px; }
+.cs-dados .case-split__text { flex: 0 1 681px; max-width: 681px; margin-left: auto; }
+.cs-dados .case-split__text p { line-height: 1; letter-spacing: 0.006em; }
+.cs-dados .case-stats-row { margin-top: 0; padding-top: 12px; }
+.cs-dados .case-stat__number { font-size: 72px; }
+
+/* Desafio */
+.cs-desafio { padding: 150px var(--gutter); }
+.cs-desafio .case-split { gap: 70px; }
+.cs-desafio .case-numbered-list { flex: 0 1 555px; margin: 0; display: flex; flex-direction: column; gap: 103px; }
+.cs-desafio .case-numbered-list li { border-top: none; padding: 44px 0 50px; gap: 24px; }
+.cs-desafio .case-numbered-list__index { flex: 0 0 48px; font-size: 12px; padding-top: 15px; opacity: 1; }
+.cs-desafio .case-numbered-list__heading { font-size: clamp(32px, 3.6vw, 52px); line-height: 53px; margin-bottom: 17px; }
+.cs-desafio .case-numbered-list p { font-size: 20px; line-height: 1.62; letter-spacing: 0.006em; }
+
+/* Solução */
+.cs-solucao { padding: 200px var(--gutter); }
+.cs-solucao .case-kicker { margin-bottom: 149px; }
+.cs-solucao .case-pillars { gap: 233px; margin-top: 0; } /* 149 + 84 do Figma */
+.cs-solucao .case-pillar__heading { font-size: clamp(32px, 3.6vw, 52px); line-height: 48px; margin-bottom: 40px; }
+.cs-solucao .case-pillar__text { gap: 70px; margin-bottom: 40px; }
+.cs-solucao .case-pillar__text p { font-size: 20px; line-height: 1.62; letter-spacing: 0.006em; text-align: left; }
+.cs-solucao .case-pillar__text p:last-child { flex: 0 1 548px; }
+.cs-solucao .case-pillar:first-child .case-pillar__text { min-height: 118px; }
+.cs-solucao .case-pillar:nth-child(2) .case-pillar__text { min-height: 162px; }
+.cs-solucao .cs-project { margin-top: 149px; }
+.cs-solucao .cs-project .case-pillar__heading { margin-bottom: 40px; }
+
+/* Carrossel horizontal de telas */
+.case-carousel {
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.case-carousel::-webkit-scrollbar { display: none; }
+.case-carousel:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.case-carousel--gap-50 { gap: 50px; }
+.case-carousel img {
+  flex: 0 0 auto;
+  height: 400px;
+  width: auto;
+  display: block;
+  scroll-snap-align: start;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Card "Conheça o projeto" */
+.case-project-card {
+  width: 100%;
+  height: 478px;
+  border-radius: 20px;
+  background: var(--vw-card);
+  box-shadow: 0 1px 3px 1px rgba(136, 136, 136, .15), 0 1px 2px 0 rgba(136, 136, 136, .3);
+  overflow: hidden;
+}
+
+/* Impacto */
+.cs-impacto { padding: 150px var(--gutter); }
+.cs-impacto .case-split__text { flex: 0 1 542px; max-width: 542px; }
+.cs-impacto .case-split__text p { font-size: 20px; line-height: 1.62; letter-spacing: 0.006em; }
+.cs-impacto .case-split__text p + p { margin-top: 17px; }
+
+/* Disclaimer */
+.cs-disclosure { padding: 125px var(--gutter) 110px; }
+.cs-disclosure p { font-size: 20px; line-height: 33px; max-width: none; text-align: justify; margin-bottom: 80px; opacity: 1; }
+.cs-disclosure .case-thanks { text-align: right; line-height: 26.4px; opacity: 1; }
+
+/* ===================================================================
+   Control Union / Peterson — frame "02 - CaseControlUnion" (node 170:439)
+   Mesmo template (classes cs-*) da Volkswagen; aqui só o que difere.
+   =================================================================== */
+.case-section--cream-ink { background: var(--case-cream); color: var(--case-navy); }
+
+/* Hero e Intro: no Figma as duas seções têm altura fixa (882 e contêiner de 883) */
+@media (min-width: 901px) {
+  .cu-hero { min-height: 882px; }
+  .cu-intro .case-section__inner { min-height: 883px; }
+}
+
+/* Problema: respiro inferior menor e itens mais próximos que os da Volkswagen
+   (os três itens somam os 1075px da lista no Figma) */
+.cu-problema { padding: 149px var(--gutter) 90px; }
+.cu-problema .case-numbered-list { gap: 17px; }
+
+/* Solução: título + frase de abertura; textos justificados; colagens do Figma */
+.cu-solucao .case-kicker { margin-bottom: 25px; }
+.cu-solucao__lead {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 32.4px;
+  letter-spacing: 0.006em;
+  max-width: 594px;
+  margin: 0 0 149px;
+}
+.cu-solucao .case-pillar__text p { text-align: justify; }
+.cu-solucao .case-pillar:nth-child(2) .case-pillar__text { min-height: 130px; }
+.cu-solucao .case-pillar:nth-child(3) .case-pillar__text { min-height: 162px; }
+.cu-solucao .case-pillar:nth-child(3) { margin-top: -84px; } /* entre o 2º e o 3º pilar o Figma usa 149px, não 233 */
+.cu-solucao .case-pillar__media {
+  display: block;
+  min-height: 0;
+  background: none;
+  border: 0;
+  border-radius: 20px;
+}
+.cu-solucao .case-pillar__media img { width: 100%; height: auto; }
+
+/* Resultados Mensuráveis: cards brancos com ícone; o 1º em duas colunas */
+.cu-resultados { padding: 149px var(--gutter) 150px; }
+.cu-resultados .cu-resultados__title { /* 2 classes: vence a margem negativa da máscara (.reveal--mask) */
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 72px);
+  line-height: normal;
+  padding: 3px 0;
+  margin: 0 0 72px;
+}
+.cu-resultados .case-result-card__text { flex: none; }
+.cu-resultados .case-result-cards { gap: 72px; margin-top: 0; }
+.cu-resultados .case-result-card { background: #fff; flex-wrap: nowrap; }
+.cu-resultados .case-result-card__icon { display: flex; align-items: center; justify-content: center; }
+.cu-resultados .case-result-card__body {
+  flex: 0 1 476px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+.cu-resultados .case-result-card__number { font-size: 36px; line-height: 40px; margin-bottom: 8px; }
+.cu-resultados .case-result-card__title { font-weight: 800; font-size: 32px; line-height: 44.8px; margin: 0 0 16px; }
+.cu-resultados .case-result-card__desc { font-size: 16px; line-height: 26px; max-width: 446px; }
+.cu-resultados .case-result-card--row .case-result-card__body {
+  flex: 0 1 987px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 56px;
+  align-items: end;
+}
+.cu-resultados .case-result-card--row .case-result-card__text { display: contents; }
+.cu-resultados .case-result-card--row .case-result-card__title { grid-column: 1; margin: 0; }
+.cu-resultados .case-result-card--row .case-result-card__desc { grid-column: 2; grid-row: 1 / span 2; align-self: end; }
+
+/* Ícones dos cards: peças vetoriais do Figma posicionadas como no arquivo */
+.cu-icon { position: relative; display: block; width: 28px; height: 28px; }
+.cu-icon__part, .cu-icon__bleed { position: absolute; }
+.cu-icon__bleed img { display: block; width: 100%; height: 100%; max-width: none; }
+
+/* ===================================================================
+   Claro Pay Empresas — frame "03 - CaseClaro" (node 170:880)
+   Hero e Intro seguem o template (cs-*); as demais seções usam um layout
+   próprio de duas colunas de 480px (título de um lado, texto do outro).
+   =================================================================== */
+
+/* Hero: logo Claro Pay numa caixa de 185×52 (como no Figma); título em bloco de 383px */
+.cl-hero .case-hero__logo { box-sizing: content-box; padding: 7px 4px 10px 1px; margin-bottom: 23px; }
+.cl-hero .case-hero__title { max-width: 1160px; min-height: 383px; margin-bottom: 40px; }
+.cl-hero .case-hero__subtitle { max-width: 1160px; }
+@media (min-width: 901px) {
+  .cl-hero { min-height: 882px; padding-bottom: 36px; }
+  /* Alturas dos contêineres no Figma — mantêm o ritmo vertical mesmo com a Satoshi
+     (mais estreita que a Inter do arquivo, quebra em menos linhas) */
+  .cl-abordagem .cl-split  { min-height: 394px; }
+  .cl-papel .cl-split      { min-height: 244px; }
+  .cl-fluxos .cl-split     { min-height: 394px; }
+  .cl-engenharia .cl-split { min-height: 358px; }
+  .cl-resultado .cl-split  { min-height: 536px; }
+}
+
+/* Intro: blocos de 774px, título à direita; texto 20px com entrelinha 20 e tracking −1px */
+.cl-intro { padding: 158px var(--gutter) 120px; }
+.cl-intro .case-split { gap: 76px; flex-wrap: nowrap; }
+.cl-intro .case-blocks { flex: 0 1 774px; max-width: 774px; gap: 69px; }
+.cl-intro .case-block p { letter-spacing: -1px; }
+.cl-intro .case-block:last-child p { line-height: 29.7px; letter-spacing: 0; }
+.cl-intro .case-kicker { line-height: 92.74px; text-align: right; opacity: 1; }
+
+/* Celulares: mockups de 436×718 lado a lado, vazando pela direita da página */
+.cl-phones { padding: 101px 0 101px var(--gutter); overflow: hidden; }
+.cl-phones .case-section__inner { max-width: none; margin: 0; }
+.cl-phones .case-phone-row { gap: 24px; padding: 52px var(--gutter) 52px 0; margin: 0; scrollbar-width: none; }
+.cl-phones .case-phone-row::-webkit-scrollbar { display: none; }
+.cl-phones .case-phone {
+  flex: 0 0 436px;
+  height: 718px;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  overflow: visible;
+}
+.cl-phones .case-phone img { height: auto; object-fit: contain; }
+
+/* Seções de duas colunas (Discovery, Abordagem, Meu papel, Fluxos, Engenharia, Resultado) */
+.cl-section { padding: 158px var(--gutter); }
+.cl-split {
+  position: relative;
+  gap: 40px;
+  flex-wrap: nowrap;
+  justify-content: space-between; /* texto sempre ancorado na borda (x = 680 ou 0), como no Figma */
+}
+/* No Figma o título transborda a coluna de 480px (ex.: "Abordagem" tem 623px):
+   aqui ele usa a largura natural, para a máscara da animação não cortá-lo */
+.cl-split > .case-kicker { flex: 0 0 auto; line-height: 92.74px; white-space: nowrap; }
+.cl-split.case-split--reverse > .case-kicker { text-align: right; }
+.cl-split > .case-split__text,
+.cl-split > .case-role-list { flex: 0 1 480px; max-width: 480px; }
+.cl-split .case-split__text p { font-size: 20px; line-height: 36px; }
+.cl-split .case-split__text p + p { margin-top: 34px; }
+
+/* Discovery: miniaturas de concorrentes, semitransparentes, vazando pela esquerda e por baixo */
+.cl-discovery { overflow: hidden; }
+.cl-discovery .cl-split { min-height: 561px; }
+.cl-discovery .case-split__text p:first-child { padding-top: 6px; }
+.cl-thumbs { position: absolute; left: 0; top: 0; width: 480px; height: 100%; pointer-events: none; }
+.cl-thumb {
+  position: absolute;
+  width: 124px;
+  height: 255px;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: .56;
+  box-shadow: 0 8px 12px 6px rgba(0, 0, 0, .15), 0 4px 4px 0 rgba(0, 0, 0, .3);
+}
+.cl-thumb.is-in { opacity: .56; }
+.cl-thumb--108 { left: -141px; top: 255px; }
+.cl-thumb--11  { left: 0;      top: 255px; }
+.cl-thumb--13  { left: -174px; top: 528px; width: 113px; }
+.cl-thumb--15  { left: -50px;  top: 528px; height: 254px; }
+.cl-thumb--110 { left: 91px;   top: 528px; }
+.cl-thumb--443 { left: 235px;  top: 528px; width: 123px; }
+
+/* Meu papel: três itens de 170px à esquerda */
+.cl-papel .case-role-list { flex: 0 1 560px; max-width: 560px; display: flex; gap: 25px; margin-top: 0; }
+.cl-papel .case-role-item { flex: 0 0 170px; }
+.cl-papel .case-role-list__heading { line-height: 31.2px; margin-bottom: 14px; }
+.cl-papel .case-role-list p { line-height: 24px; }
+.cl-papel .case-role-list__heading { max-width: 170px; }
+
+/* ===================================================================
+   Micro-interações dos cases (Volkswagen, Claro, Peterson)
+   As classes são aplicadas por js/case-motion.js (sem JS, tudo fica visível).
+   Variações do .reveal de style.css: mesmo gatilho (.is-in), movimentos diferentes.
+   =================================================================== */
+
+/* Cor de fundo de cada seção, usada pela faixa do título preso no mobile */
+.case-section--black      { --section-bg: var(--case-black); }
+.case-section--navy       { --section-bg: var(--case-navy); }
+.case-section--blue       { --section-bg: var(--case-blue-pale); }
+.case-section--purple     { --section-bg: var(--case-purple); }
+.case-section--red-deep   { --section-bg: var(--case-red-deep); }
+.case-section--terracotta { --section-bg: var(--case-terracotta); }
+.case-section--red-bright { --section-bg: var(--case-red-bright); }
+.case-section--cream,
+.case-section--cream-ink  { --section-bg: var(--case-cream); }
+.case-section--vw-light    { --section-bg: var(--vw-light); }
+.case-section--vw-midnight { --section-bg: var(--vw-midnight); }
+.case-section--vw-teal,
+.case-section--vw-teal-inv { --section-bg: var(--vw-teal); }
+.case-section--vw-ivory    { --section-bg: var(--vw-ivory); }
+.case-section--vw-ocean    { --section-bg: var(--vw-ocean); }
+
+.reveal--left  { transform: translateX(-40px); }
+.reveal--right { transform: translateX(60px); }
+.reveal--pop   { transform: scale(.82); transition-timing-function: cubic-bezier(.34,1.56,.64,1); }
+.reveal--zoom  { transform: scale(1.18); transform-origin: right center; }
+.reveal--scale { transform: scale(.94); }
+.reveal--left.is-in, .reveal--right.is-in, .reveal--pop.is-in,
+.reveal--zoom.is-in, .reveal--scale.is-in { transform: none; }
+
+/* Máscara: o título fica parado (e visível p/ o observer); só o span interno desliza */
+.reveal--mask,
+.reveal--curtain {
+  opacity: 1;
+  transform: none;
+  overflow: hidden;
+  padding-bottom: .14em;   /* folga para descendentes (ç, g, p) */
+  margin-bottom: -.14em;
+}
+.case-mask-inner {
+  display: inline-block;
+  transition: transform .9s cubic-bezier(.16,.8,.3,1);
+  transition-delay: calc(var(--reveal-index, 0) * 90ms);
+}
+.reveal--mask .case-mask-inner    { transform: translateY(110%); }
+.reveal--curtain .case-mask-inner { transform: translateX(105%); }
+.reveal--mask.is-in .case-mask-inner,
+.reveal--curtain.is-in .case-mask-inner { transform: none; }
+
+/* Hero: palavras do título sobem por máscara, em cascata; logo desce; subtítulo por último */
+.case-word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+.case-word > span {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform .9s cubic-bezier(.16,.8,.3,1);
+  transition-delay: calc(180ms + var(--w, 0) * 45ms);
+}
+.case-hero.is-in .case-word > span { transform: none; }
+.case-hero.is-motion .case-hero__logo,
+.case-hero.is-motion .case-hero__subtitle {
+  opacity: 0;
+  transition: opacity .8s ease, transform .8s cubic-bezier(.16,.8,.3,1);
+}
+.case-hero.is-motion .case-hero__logo { transform: translateY(-14px); }
+.case-hero.is-motion .case-hero__subtitle { transform: translateY(14px); transition-delay: .75s; }
+.case-hero.is-motion.is-in .case-hero__logo { opacity: .95; transform: none; }
+.cs-hero.is-motion.is-in .case-hero__logo { opacity: 1; }
+.case-hero.is-motion.is-in .case-hero__subtitle { opacity: 1; transform: none; }
+
+/* Títulos que acompanham o scroll, presos dentro da própria seção
+   (o limite é o contêiner do título — ele solta ao chegar no fim do conteúdo).
+   Marcados no HTML com .case-kicker--sticky. */
+@media (min-width: 901px) {
+  .case-kicker--sticky { position: sticky; top: calc(var(--header-h) + 40px); }
+}
+
+/* Listas numeradas: item no centro da tela em foco */
+.case-focus li {
+  opacity: .28;
+  transition: opacity .5s ease;
+}
+.case-focus li.is-active { opacity: 1; }
+.case-focus .case-numbered-list__index {
+  display: inline-block;
+  transition: transform .5s cubic-bezier(.16,.8,.3,1);
+}
+.case-focus li.is-active .case-numbered-list__index { transform: translateX(6px); }
+
+/* Carrosséis e fileiras de telas: arrastáveis com o mouse, telas levantam no hover */
+.is-draggable { cursor: grab; }
+.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+.is-dragging > * { pointer-events: none; }
+.case-carousel { padding: 8px 0 16px; margin: -8px 0 -16px; }
+.case-carousel > .reveal,
+.case-phone-row > .reveal { transition: opacity .7s cubic-bezier(.16,.8,.3,1), transform .7s cubic-bezier(.16,.8,.3,1), box-shadow .35s ease; }
+.case-carousel > .is-in:hover,
+.case-phone-row > .is-in:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px -18px rgba(0, 0, 0, .55);
+  transition-delay: 0s;
+}
+.case-phone-row:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+
+/* Card "Conheça o projeto" e imagens dos pilares */
+.case-project-card.reveal--scale,
+.case-pillar__media.reveal--scale { transform-origin: center top; }
+
+/* Disclaimer: sublinhado desenhado no "Obrigado" */
+.case-disclosure .case-thanks { position: relative; display: inline-block; }
+.case-disclosure .case-thanks::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .8s cubic-bezier(.16,.8,.3,1) .5s;
+}
+.case-disclosure .case-thanks.is-in::after { transform: scaleX(1); }
+.cs-disclosure .case-section__inner { display: flex; flex-direction: column; }
+.cs-disclosure .case-thanks { align-self: flex-end; }
+
+@media (prefers-reduced-motion: reduce) {
+  .case-mask-inner { transform: none !important; transition: none; }
+  .case-word > span,
+  .case-hero.is-motion .case-hero__logo,
+  .case-hero.is-motion .case-hero__subtitle { transform: none; opacity: 1; transition: none; }
+  .case-focus li { opacity: 1; }
+  .case-carousel > .is-in:hover, .case-phone-row > .is-in:hover { transform: none; }
+}
+
+@media (max-width: 900px) {
+  .cs-hero { padding: 140px var(--gutter) 90px; }
+  .cs-hero .case-hero__logo { max-width: 200px; }
+  .cs-intro, .cs-dados, .cs-desafio, .cs-impacto { padding-top: 90px; padding-bottom: 90px; }
+  .cs-solucao { padding: 100px var(--gutter); }
+  .cs-solucao .case-kicker { margin-bottom: 60px; }
+  .cs-solucao .case-pillars { gap: 90px; }
+  .cs-solucao .cs-project { margin-top: 90px; }
+  .cs-desafio .case-numbered-list { gap: 0; }
+  .cu-problema { padding: 90px var(--gutter); }
+  .cu-solucao .case-kicker { margin-bottom: 20px; }
+  .cu-solucao__lead { margin-bottom: 60px; }
+  .cu-solucao .case-pillar:nth-child(3) { margin-top: 0; }
+  .cu-solucao .case-pillar__text { min-height: 0 !important; }
+  .cu-resultados { padding: 90px var(--gutter); }
+  .cu-resultados__title { margin-bottom: 40px; }
+  .cu-resultados .case-result-cards { gap: 24px; }
+  .cu-resultados .case-result-card { flex-direction: column; }
+  .cu-resultados .case-result-card__title { font-size: 26px; line-height: 1.3; }
+  .cu-resultados .case-result-card--row .case-result-card__body { display: flex; }
+  .cu-resultados .case-result-card--row .case-result-card__desc { margin-top: 16px; }
+  .cl-hero .case-hero__title { min-height: 0; margin-bottom: 24px; }
+  .cl-intro { padding: 90px var(--gutter); }
+  .cl-intro .case-split { flex-wrap: wrap; gap: 40px; }
+  .cl-intro .case-kicker { text-align: left; line-height: .92; }
+  .cl-phones { padding: 60px 0 60px var(--gutter); }
+  .cl-phones .case-phone-row { padding: 24px var(--gutter) 24px 0; gap: 16px; }
+  .cl-phones .case-phone { flex-basis: 260px; height: 428px; }
+  .cl-section { padding: 90px var(--gutter); }
+  /* coluna sem wrap: com wrap, a coluna assume a largura máxima do conteúdo (a fileira de miniaturas) */
+  .cl-split { gap: 32px; flex-wrap: nowrap; }
+  .cl-split > .case-kicker,
+  .cl-split > .case-split__text,
+  .cl-split > .case-role-list,
+  .cl-split > .cl-thumbs { flex: 0 0 auto; min-width: 0; max-width: 100%; align-self: stretch; }
+  .cl-split > .case-kicker { flex-basis: auto; line-height: .92; white-space: normal; }
+  .cl-split.case-split--reverse > .case-kicker { text-align: left; }
+  .cl-split > .case-split__text, .cl-split > .case-role-list { max-width: none; }
+  .cl-split .case-split__text p { font-size: 17px; line-height: 1.7; }
+  .cl-discovery .cl-split { min-height: 0; }
+  .cl-thumbs { position: static; width: auto; height: auto; display: flex; gap: 12px; overflow-x: auto; pointer-events: auto; padding-bottom: 8px; }
+  .cl-thumb { position: static; flex: 0 0 110px; width: 110px !important; height: 226px !important; }
+  .cl-papel .case-role-list { flex-direction: column; gap: 28px; }
+  .cl-papel .case-role-item { flex-basis: auto; }
+  .cl-papel .case-role-list__heading { max-width: none; }
+  .cs-disclosure p { text-align: left; font-size: 17px; line-height: 1.65; } /* justificado abre "rios" na coluna estreita */
+  /* Título preso no mobile (.case-kicker--sticky-mobile — usado no Intro): vem antes
+     do conteúdo e acompanha o scroll, preso logo abaixo do header até o fim da seção. Ganha uma faixa com o fundo da seção
+     (de borda a borda) para o texto passar por baixo sem se misturar. */
+  .case-kicker--sticky-mobile {
+    order: -1;
+    position: sticky;
+    top: var(--header-h);
+    z-index: 2;
+    align-self: stretch;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 14px var(--gutter);
+    background: var(--section-bg);
+    opacity: 1; /* no desktop o Intro é .95 (Figma); aqui a faixa precisa ser opaca */
+  }
+  .case-carousel { gap: 20px; }
+  .case-carousel img { height: 240px; }
+  .case-project-card { height: 260px; }
+  .cs-disclosure .case-thanks { align-self: flex-start; }
+}
+
 @media (max-width: 900px) {
   :root { --gutter: 32px; }
-  .case-hero { padding-top: 140px; }
+  .case-hero { padding-top: 76px; }
   .case-intro { flex-direction: column; gap: 40px; }
   .case-split { flex-direction: column; }
   .case-split--reverse { flex-direction: column; }
   .case-role-list { grid-template-columns: 1fr; }
   .case-pillar__text { flex-direction: column; }
   .case-result-card__body { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .case-image-grid--3 img { flex-basis: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

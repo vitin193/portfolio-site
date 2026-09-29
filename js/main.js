@@ -3,15 +3,41 @@
 document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Alternância de idioma → efeito de "press" antes de navegar para a versão em inglês
+  // Faixa vermelha do Currículo: trava a largura no tamanho real renderizado
+  // da palavra "Currículo", pra faixa sempre terminar exatamente no fim dela,
+  // em qualquer largura de tela.
+  const resumeHeading = document.querySelector('.resume-heading');
+  const resumeHeader = document.querySelector('.resume-header');
+  if (resumeHeading && resumeHeader) {
+    const syncResumeStripeWidth = () => {
+      const w = resumeHeading.getBoundingClientRect().width;
+      if (w > 0) resumeHeader.style.setProperty('--resume-stripe-w', w + 'px');
+    };
+    syncResumeStripeWidth();
+    window.addEventListener('resize', syncResumeStripeWidth);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(syncResumeStripeWidth);
+    }
+  }
+
+  // Alternância de idioma → efeito de "press" antes de navegar para a outra versão
   const langToggle = document.getElementById('langToggle');
   if (langToggle) {
+    const isEN = window.location.pathname.startsWith('/en/') || window.location.pathname.includes('/en/');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const targetPage = (currentPage === 'index.html' || currentPage === '') ? '' : currentPage;
+    const targetHref = isEN ? '/' + targetPage : '/en/' + targetPage;
+
+    langToggle.setAttribute('aria-pressed', String(isEN));
+    langToggle.querySelector('.lang-toggle__label').textContent = isEN ? 'PT-BR' : 'EN-US';
+    langToggle.setAttribute('aria-label', isEN ? 'Mudar idioma para português' : 'Mudar idioma para inglês');
+
     langToggle.addEventListener('click', (e) => {
-      if (reduceMotion) return; // navega direto
+      if (reduceMotion) { window.location.href = targetHref; return; }
       e.preventDefault();
-      langToggle.setAttribute('aria-pressed', 'true');
+      langToggle.setAttribute('aria-pressed', String(!isEN));
       const delay = 220;
-      setTimeout(() => { window.location.href = '/en/'; }, delay);
+      setTimeout(() => { window.location.href = targetHref; }, delay);
     });
   }
 
@@ -79,16 +105,66 @@ document.addEventListener('DOMContentLoaded', () => {
   if (copyEmailBtn) {
     const emailSpan = copyEmailBtn.querySelector('span');
     const originalText = emailSpan.textContent;
+    const isENPage = window.location.pathname.includes('/en/');
+    const copiedMsg = isENPage ? 'Email copied!' : 'Email copiado!';
 
     copyEmailBtn.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(originalText.trim());
-        emailSpan.textContent = 'Email copiado!';
+        emailSpan.textContent = copiedMsg;
         setTimeout(() => { emailSpan.textContent = originalText; }, 2000);
       } catch (err) {
         // Clipboard API indisponível — não faz nada, o link continua legível
       }
     });
+  }
+
+  // --- Menu mobile (hambúrguer) ---
+  // O botão é criado aqui (sem JS o menu continua como lista normal no header).
+  const siteHeader = document.querySelector('.site-header');
+  const siteNav = siteHeader?.querySelector('.nav');
+  if (siteHeader && siteNav) {
+    const isENMenu = window.location.pathname.includes('/en/');
+    const labels = isENMenu ? ['Open menu', 'Close menu'] : ['Abrir menu', 'Fechar menu'];
+    siteNav.id = siteNav.id || 'site-nav';
+
+    const navToggle = document.createElement('button');
+    navToggle.type = 'button';
+    navToggle.className = 'nav-toggle';
+    navToggle.setAttribute('aria-controls', siteNav.id);
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', labels[0]);
+    navToggle.innerHTML = '<span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span>';
+    siteNav.before(navToggle);
+    siteHeader.classList.add('js-nav');
+
+    const desktopMenu = window.matchMedia('(min-width: 821px)');
+    const setMenuOpen = (open) => {
+      siteHeader.classList.toggle('is-menu-open', open);
+      document.documentElement.classList.toggle('is-menu-locked', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.setAttribute('aria-label', labels[open ? 1 : 0]);
+    };
+
+    navToggle.addEventListener('click', () => {
+      const open = !siteHeader.classList.contains('is-menu-open');
+      setMenuOpen(open);
+      if (open) siteNav.querySelector('a, button')?.focus({ preventScroll: true });
+    });
+    // Fecha ao escolher um link, com Esc, ao clicar fora ou ao voltar para o desktop
+    siteNav.addEventListener('click', (e) => {
+      if (e.target.closest('a')) setMenuOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && siteHeader.classList.contains('is-menu-open')) {
+        setMenuOpen(false);
+        navToggle.focus();
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (siteHeader.classList.contains('is-menu-open') && !siteHeader.contains(e.target)) setMenuOpen(false);
+    });
+    desktopMenu.addEventListener('change', (e) => { if (e.matches) setMenuOpen(false); });
   }
 
   // Dropdown "Projetos" acessível por teclado/toque (além do hover via CSS)
