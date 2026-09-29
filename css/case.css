@@ -487,13 +487,36 @@
 
 /* Card "Conheça o projeto" */
 .case-project-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 478px;
   border-radius: 20px;
   background: var(--vw-card);
   box-shadow: 0 1px 3px 1px rgba(136, 136, 136, .15), 0 1px 2px 0 rgba(136, 136, 136, .3);
   overflow: hidden;
+  color: var(--vw-light);
+  text-decoration: none;
 }
+/* Card como link para o protótipo no Figma */
+a.case-project-card { transition: opacity .7s cubic-bezier(.16,.8,.3,1), transform .35s cubic-bezier(.16,.8,.3,1), box-shadow .35s ease; }
+a.case-project-card.is-in:hover,
+a.case-project-card:not(.reveal):hover { transform: translateY(-6px); box-shadow: 0 24px 48px -20px rgba(0, 0, 0, .55); }
+a.case-project-card:focus-visible { outline: 2px solid var(--vw-light); outline-offset: 4px; }
+.case-project-card__label {
+  font-family: var(--font-body);
+  font-size: 16px;
+  letter-spacing: .02em;
+  padding: 12px 26px;
+  border: 1px solid rgba(242, 242, 241, .5);
+  border-radius: 999px;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+.case-project-card__arrow { display: inline-block; transition: transform .3s cubic-bezier(.16,.8,.3,1); }
+a.case-project-card:hover .case-project-card__label,
+a.case-project-card:focus-visible .case-project-card__label { background: var(--vw-light); color: var(--vw-card); border-color: var(--vw-light); }
+a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, -3px); }
 
 /* Impacto */
 .cs-impacto { padding: 150px var(--gutter); }
