@@ -784,6 +784,10 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   /* em coluna, "flex: 1 1 0" vira altura zero e o texto vazava para fora do card */
   .case-card__content { flex: 0 0 auto; min-height: 0; }
   .case-card__heading { max-width: none; }
+  /* tags: espaço também entre as linhas quando quebram */
+  .case-card__tags { gap: 12px 12px; }
+  /* "ver +" no canto inferior direito do card */
+  .case-card__view { order: 3; align-self: flex-end; margin-top: 20px; }
   .resume-item { flex-direction: column; gap: 12px; }
   /* idem: as bases de 251px/150px viravam altura e abriam vãos entre os itens */
   .resume-item > .resume-item__who,
