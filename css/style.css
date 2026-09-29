@@ -781,8 +781,20 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   .case-card { padding: 16px 24px 16px 0; }
   .case-card__inner { flex-direction: column; padding: 32px; gap: 24px; }
   .case-card__view { position: static; margin-top: 16px; }
-  .case-card__content { min-height: 0; }
+  /* em coluna, "flex: 1 1 0" vira altura zero e o texto vazava para fora do card */
+  .case-card__content { flex: 0 0 auto; min-height: 0; }
+  .case-card__heading { max-width: none; }
   .resume-item { flex-direction: column; gap: 12px; }
-  .resume-item__who { flex-basis: auto; }
+  /* idem: as bases de 251px/150px viravam altura e abriam vãos entre os itens */
+  .resume-item > .resume-item__who,
+  .resume-item > .resume-item__desc,
+  .resume-item > .resume-item__date { flex: 0 0 auto; }
   .resume-item__date { text-align: left; }
+  .resume-item__desc { text-align: left; font-size: 18px; } /* justificado abre "rios" na coluna estreita */
+  /* faixa "de 2019 à 2026": cresce até caber a data, sem quebrar linha */
+  .resume-daterange { min-width: max-content; font-size: clamp(26px, 7.5vw, 36px); gap: 10px; padding-right: 24px; }
+  .resume-daterange > * { white-space: nowrap; }
+  /* contatos do rodapé: área de toque de 44px */
+  .footer-contact { gap: 4px; }
+  .footer-contact__item { min-height: 44px; }
 }

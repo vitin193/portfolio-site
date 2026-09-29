@@ -841,6 +841,30 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
 }
 
 @media (max-width: 900px) {
+  /* --- Auditoria mobile ---
+     Parágrafos dos pilares: em coluna, "flex: 1 1 320px" virava 320px de ALTURA
+     (vãos enormes); justificado abre "rios" na coluna estreita. */
+  .case-pillar__text { gap: 20px; min-height: 0 !important; }
+  .case-pillar__text p { flex: 0 0 auto !important; text-align: left !important; }
+  /* Entrelinha 20/20 do Figma (Intro/Dados) fica apertada demais no celular */
+  .cs-intro .case-block p,
+  .cs-dados .case-split__text p { line-height: 1.5; letter-spacing: 0; }
+  .cl-intro .case-block p { line-height: 1.5; letter-spacing: 0; }
+  .cs-intro .case-block p + p,
+  .cs-intro .case-block p.cs-tight { margin-top: 12px; }
+  /* Números: os três lado a lado, compactos, em vez de ~170px cada empilhados */
+  .case-stats-row { flex-wrap: nowrap; gap: 8px; margin-top: 32px; }
+  .case-stat { flex: 1 1 0; min-width: 0; padding: 16px 2px; }
+  .case-stat__number,
+  .cs-dados .case-stat__number { font-size: clamp(24px, 8vw, 44px); margin-bottom: 8px; white-space: nowrap; }
+  .case-stat__label { font-size: 12px; }
+  .cs-dados .case-split { min-height: 0; }
+  /* Listas numeradas: título menor e índice mais estreito (palavras longas cabem em 320px) */
+  .cs-desafio .case-numbered-list li { gap: 12px; padding: 28px 0; }
+  .cs-desafio .case-numbered-list__index { flex-basis: 28px; }
+  .cs-desafio .case-numbered-list__heading { font-size: clamp(24px, 7.2vw, 32px); line-height: 1.15; }
+  .cs-desafio .case-numbered-list p { font-size: 17px; }
+
   .cs-hero { padding: 140px var(--gutter) 90px; }
   .cs-hero .case-hero__logo { max-width: 200px; }
   .cs-intro, .cs-dados, .cs-desafio, .cs-impacto { padding-top: 90px; padding-bottom: 90px; }
