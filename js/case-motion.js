@@ -158,16 +158,12 @@
     });
   }
 
-  // --- Carrosséis: arrasto com inércia + slider minimalista ---
+  // --- Carrosséis: arrasto com inércia + paginação minimalista ---
   // Sem scroll-snap: o "proximity" puxava o carrossel de volta ao soltar o
   // arrasto (o tranco que dava a sensação de travado). No lugar, o arrasto do
-  // mouse continua deslizando e desacelera; setas/teclado vão de tela em tela.
+  // mouse continua deslizando e desacelera; teclado vai de tela em tela.
   const isEn = document.documentElement.lang.startsWith('en');
-  const label = isEn
-    ? { prev: 'Previous', next: 'Next', slider: 'Carousel position' }
-    : { prev: 'Anterior', next: 'Próximo', slider: 'Posição do carrossel' };
-  const arrow = (d) => '<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="' + d +
-    '" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const pageLabel = (n) => (isEn ? 'Go to page ' : 'Ir para página ') + n;
 
   carousels.forEach((carousel) => {
     carousel.classList.add('is-draggable');
@@ -189,40 +185,50 @@
       preload.observe(carousel);
     }
 
-    // --- Slider: trilho fino com a fatia visível + setas ---
-    const slider = document.createElement('div');
-    slider.className = 'case-slider';
-    slider.innerHTML =
-      '<div class="case-slider__track" role="scrollbar" aria-label="' + label.slider + '" aria-orientation="horizontal"' +
-        ' aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="case-slider__thumb"></span></div>' +
-      '<div class="case-slider__nav">' +
-        '<button type="button" class="case-slider__btn" aria-label="' + label.prev + '">' + arrow('M12 4 6 10l6 6') + '</button>' +
-        '<button type="button" class="case-slider__btn" aria-label="' + label.next + '">' + arrow('M8 4l6 6-6 6') + '</button>' +
-      '</div>';
-    carousel.after(slider);
-    const track = slider.querySelector('.case-slider__track');
-    const thumb = slider.querySelector('.case-slider__thumb');
-    const [prevBtn, nextBtn] = slider.querySelectorAll('.case-slider__btn');
+    // --- Paginação: um ponto por "tela" de scroll (não por card); o ativo vira pílula ---
+    const pager = document.createElement('div');
+    pager.className = 'case-pager';
+    carousel.after(pager);
+    let dots = [];
+    let current = -1;
 
     const maxScroll = () => carousel.scrollWidth - carousel.clientWidth;
-    let thumbW = 0;
-    let trackW = 0;
+    // A última página para no fim do scroll, não em N × largura
+    const pageLeft = (i) => Math.min(i * carousel.clientWidth, maxScroll());
     let painting = false;
     const paint = () => {
       painting = false;
-      const max = maxScroll();
-      const p = max > 0 ? Math.min(1, Math.max(0, carousel.scrollLeft / max)) : 0;
-      thumb.style.transform = 'translateX(' + p * (trackW - thumbW) + 'px)';
-      track.setAttribute('aria-valuenow', String(Math.round(p * 100)));
-      prevBtn.disabled = carousel.scrollLeft <= 1;
-      nextBtn.disabled = carousel.scrollLeft >= max - 1;
+      if (!dots.length) return;
+      // Página ativa = a de posição mais próxima do scroll atual
+      const x = carousel.scrollLeft;
+      let active = 0;
+      dots.forEach((_, i) => {
+        if (Math.abs(pageLeft(i) - x) < Math.abs(pageLeft(active) - x)) active = i;
+      });
+      if (active === current) return;
+      if (dots[current]) dots[current].removeAttribute('aria-current');
+      dots[active].setAttribute('aria-current', 'true');
+      current = active;
     };
     const layout = () => {
-      slider.hidden = maxScroll() <= 1;
-      trackW = track.clientWidth;
-      const ratio = carousel.scrollWidth ? carousel.clientWidth / carousel.scrollWidth : 1;
-      thumbW = Math.max(40, trackW * Math.min(1, ratio));
-      thumb.style.width = thumbW + 'px';
+      const pages = maxScroll() > 1 ? Math.ceil(carousel.scrollWidth / carousel.clientWidth) : 1;
+      const count = pages > 1 ? pages : 0; // com uma página só, não mostra nada
+      pager.hidden = !count;
+      if (count !== dots.length) {
+        dots = Array.from({ length: count }, (_, i) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'case-pager__dot';
+          dot.setAttribute('aria-label', pageLabel(i + 1));
+          dot.addEventListener('click', () => {
+            stopGlide();
+            carousel.scrollTo({ left: pageLeft(i), behavior });
+          });
+          return dot;
+        });
+        pager.replaceChildren(...dots);
+        current = -1;
+      }
       paint();
     };
 
@@ -251,38 +257,10 @@
       const target = dir > 0 ? lefts.find((l) => l > x + 2) : lefts.reverse().find((l) => l < x - 2);
       carousel.scrollTo({ left: target === undefined ? (dir > 0 ? maxScroll() : 0) : target, behavior });
     };
-    prevBtn.addEventListener('click', () => step(-1));
-    nextBtn.addEventListener('click', () => step(1));
     carousel.addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
       e.preventDefault();
       step(e.key === 'ArrowRight' ? 1 : -1);
-    });
-
-    // Trilho: clicar/arrastar move o carrossel na hora
-    const scrollFromTrack = (clientX, grab) => {
-      const p = (clientX - track.getBoundingClientRect().left - grab) / Math.max(1, trackW - thumbW);
-      carousel.scrollLeft = Math.min(1, Math.max(0, p)) * maxScroll();
-    };
-    track.addEventListener('pointerdown', (e) => {
-      if (e.button !== 0) return;
-      stopGlide();
-      const thumbRect = thumb.getBoundingClientRect();
-      const onThumb = e.clientX >= thumbRect.left && e.clientX <= thumbRect.right;
-      const grab = onThumb ? e.clientX - thumbRect.left : thumbW / 2;
-      track.setPointerCapture(e.pointerId);
-      slider.classList.add('is-active');
-      scrollFromTrack(e.clientX, grab);
-      const move = (ev) => scrollFromTrack(ev.clientX, grab);
-      const up = () => {
-        slider.classList.remove('is-active');
-        track.removeEventListener('pointermove', move);
-        track.removeEventListener('pointerup', up);
-        track.removeEventListener('pointercancel', up);
-      };
-      track.addEventListener('pointermove', move);
-      track.addEventListener('pointerup', up);
-      track.addEventListener('pointercancel', up);
     });
 
     // --- Arrasto com o mouse + inércia (touch/trackpad já rolam nativamente) ---

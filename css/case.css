@@ -810,57 +810,45 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
 .is-dragging > *,
 .is-scrolling > * { pointer-events: none; }
 
-/* Slider dos carrosséis (criado pelo case-motion.js): linha fina com a fatia
-   visível + duas setas. Usa currentColor, então segue a cor de cada seção. */
-.case-slider {
+/* Paginação dos carrosséis (criada pelo case-motion.js): um ponto por tela de
+   scroll; o ativo vira pílula. Usa currentColor, então segue a cor de cada seção.
+   Cada botão tem 24px de área de toque; o visual (4px) é o ::before. As margens
+   negativas encostam as áreas de toque para os pontos ficarem a 6px um do outro. */
+.case-pager {
   display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-top: 32px;
+  justify-content: center;
+  padding: 0 7px;
+  margin-top: 18px;        /* + 10px de respiro do botão = 28px até a base dos cards */
 }
-.case-slider[hidden] { display: none; }
-.case-slider__track {
+.case-pager[hidden] { display: none; }
+.case-pager__dot {
   position: relative;
-  flex: 1 1 auto;
-  height: 24px;            /* área de toque; a linha visível é o ::before */
-  cursor: pointer;
-  touch-action: none;
+  flex: 0 0 auto;
+  width: 24px;             /* 4px de ponto + 2 × 10px */
+  height: 24px;
+  margin: 0 -7px;          /* 10 + 10 − 7 − 7 = 6px entre os pontos */
+  transition: width .22s ease-out;
 }
-.case-slider__track::before {
+.case-pager__dot::before {
   content: "";
   position: absolute;
-  inset: 50% 0 auto;
-  height: 1px;
-  background: currentColor;
-  opacity: .25;
-}
-.case-slider__thumb {
-  position: absolute;
   top: 50%;
-  left: 0;
-  height: 2px;
-  margin-top: -1px;
+  left: 10px;
+  right: 10px;
+  height: 4px;
+  margin-top: -2px;
+  border-radius: 999px;
   background: currentColor;
-  border-radius: 2px;
-  will-change: transform;
-  transition: height .2s ease, margin-top .2s ease;
+  opacity: .4;
+  transition: opacity .22s ease-out;
 }
-.case-slider__track:hover .case-slider__thumb,
-.case-slider.is-active .case-slider__thumb { height: 4px; margin-top: -2px; }
-.case-slider__nav { display: flex; gap: 4px; flex: 0 0 auto; }
-.case-slider__btn {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  color: inherit;
-  transition: opacity .2s ease, background-color .2s ease;
-}
-.case-slider__btn:hover:not(:disabled) { background: color-mix(in srgb, currentColor 12%, transparent); }
-.case-slider__btn:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
-.case-slider__btn:disabled { opacity: .3; cursor: default; }
-.cl-phones .case-slider { margin: 0 var(--gutter) 0 0; }
+.case-pager__dot[aria-current="true"] { width: 38px; } /* pílula de 18px */
+.case-pager__dot[aria-current="true"]::before { opacity: 1; }
+.case-pager__dot:hover:not([aria-current])::before { opacity: .7; }
+.case-pager__dot:focus-visible { outline: none; }
+.case-pager__dot:focus-visible::before { outline: 1px solid currentColor; outline-offset: 3px; }
+/* Fileira de telas do Claro: 52px de respiro embaixo e sangra à direita */
+.cl-phones .case-pager { margin: -34px var(--gutter) 0 0; }
 .case-carousel { padding: 8px 0 16px; margin: -8px 0 -16px; }
 .case-carousel > .reveal,
 .case-phone-row > .reveal { transition: opacity .7s cubic-bezier(.16,.8,.3,1), transform .7s cubic-bezier(.16,.8,.3,1), box-shadow .35s ease; }
@@ -899,6 +887,7 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
   .case-hero.is-motion .case-hero__subtitle { transform: none; opacity: 1; transition: none; }
   .case-focus li { opacity: 1; }
   .case-carousel > .is-in:hover, .case-phone-row > .is-in:hover { transform: none; }
+  .case-pager__dot, .case-pager__dot::before { transition: none; }
 }
 
 @media (max-width: 900px) {
@@ -988,7 +977,7 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
   }
   .case-carousel { gap: 20px; }
   .case-carousel img { height: 240px; }
-  .case-slider { margin-top: 20px; gap: 16px; }
+  .cl-phones .case-pager { margin-top: -6px; } /* respiro da fileira cai para 24px */
   .case-project-card { height: 260px; }
   .cs-disclosure .case-thanks { align-self: flex-start; }
 }
