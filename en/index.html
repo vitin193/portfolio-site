@@ -65,7 +65,12 @@
       <svg class="curved-text" viewBox="0 0 466 466" aria-hidden="true">
         <path id="curvedTextPath" d="M 233 13 A 220 220 0 1 1 232.99 13" fill="none"/>
         <text>
-          <textPath href="#curvedTextPath" startOffset="0%">Design Systems&#160;&#160;&#160;&#160;&#160;&#160;Discovery&#160;&#160;&#160;&#160;&#160;&#160;Research&#160;&#160;&#160;&#160;&#160;&#160;Design+IA&#160;&#160;&#160;&#160;&#160;&#160;</textPath>
+          <!-- palavras com vãos iguais preenchendo o círculo todo: cada startOffset = soma das
+               larguras anteriores + vãos (medidas na Satoshi 500 39px; circunferência 2π·220 ≈ 1382) -->
+          <textPath href="#curvedTextPath" startOffset="0.00%">Design Systems</textPath>
+          <textPath href="#curvedTextPath" startOffset="30.83%">Discovery</textPath>
+          <textPath href="#curvedTextPath" startOffset="54.51%">Research</textPath>
+          <textPath href="#curvedTextPath" startOffset="77.21%">Design+IA</textPath>
         </text>
       </svg>
     </h1>
