@@ -988,6 +988,7 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
   .case-intro { flex-direction: column; gap: 40px; }
   .case-split { flex-direction: column; }
   .case-split--reverse { flex-direction: column; }
+  .cs-impacto .case-kicker { order: -1; } /* no HTML o título vem depois do texto (fica à direita no desktop) */
   .case-role-list { grid-template-columns: 1fr; }
   .case-pillar__text { flex-direction: column; }
   .case-result-card__body { flex-direction: column; align-items: flex-start; gap: 12px; }
