@@ -536,7 +536,7 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
 .case-section--cream-ink { background: var(--case-cream); color: var(--case-navy); }
 
 /* Hero e Intro: no Figma as duas seções têm altura fixa (882 e contêiner de 883) */
-@media (min-width: 901px) {
+@media (min-width: 1201px) {
   .cu-hero { min-height: 882px; }
   .cu-intro .case-section__inner { min-height: 883px; }
 }
@@ -634,7 +634,7 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
 .cl-hero .case-hero__logo { box-sizing: content-box; padding: 7px 4px 10px 1px; margin-bottom: 23px; }
 .cl-hero .case-hero__title { max-width: 1160px; min-height: 383px; margin-bottom: 40px; }
 .cl-hero .case-hero__subtitle { max-width: 1160px; }
-@media (min-width: 901px) {
+@media (min-width: 1201px) {
   .cl-hero { min-height: 882px; padding-bottom: 36px; }
   /* Alturas dos contêineres no Figma — mantêm o ritmo vertical mesmo com a Satoshi
      (mais estreita que a Inter do arquivo, quebra em menos linhas) */
@@ -788,7 +788,7 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
 /* Títulos que acompanham o scroll, presos dentro da própria seção
    (o limite é o contêiner do título — ele solta ao chegar no fim do conteúdo).
    Marcados no HTML com .case-kicker--sticky. */
-@media (min-width: 901px) {
+@media (min-width: 1201px) {
   .case-kicker--sticky { position: sticky; top: calc(var(--header-h) + 40px); }
 }
 
@@ -890,7 +890,10 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
   .case-pager__dot, .case-pager__dot::before { transition: none; }
 }
 
-@media (max-width: 900px) {
+/* Até 1200px (celular e tablet) as seções ficam empilhadas, com o título antes do
+   conteúdo: entre 901 e 1200px o layout de colunas do desktop não cabia (títulos
+   cortados, lista "Meu papel" vazando, colunas de texto estreitas). */
+@media (max-width: 1200px) {
   /* --- Auditoria mobile ---
      Parágrafos dos pilares: em coluna, "flex: 1 1 320px" virava 320px de ALTURA
      (vãos enormes); justificado abre "rios" na coluna estreita. */
@@ -909,6 +912,7 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
   .cs-dados .case-stat__number { font-size: clamp(24px, 8vw, 44px); margin-bottom: 8px; white-space: nowrap; }
   .case-stat__label { font-size: 12px; }
   .cs-dados .case-split { min-height: 0; }
+  .cs-dados .case-split__text { margin-left: 0; } /* empilhado, o texto alinha com o título "Dados" */
   /* Listas numeradas: título menor e índice mais estreito (palavras longas cabem em 320px) */
   .cs-desafio .case-numbered-list li { gap: 12px; padding: 28px 0; }
   .cs-desafio .case-numbered-list__index { flex-basis: 28px; }
@@ -985,6 +989,9 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
 @media (max-width: 900px) {
   :root { --gutter: 32px; }
   .case-hero { padding-top: 76px; }
+}
+
+@media (max-width: 1200px) {
   .case-intro { flex-direction: column; gap: 40px; }
   .case-split { flex-direction: column; }
   .case-split--reverse { flex-direction: column; }
