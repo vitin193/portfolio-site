@@ -480,7 +480,7 @@
   height: 400px;
   width: auto;
   display: block;
-  border-radius: 12px;
+  border-radius: 8px;
   user-select: none;
   -webkit-user-drag: none;
 }
