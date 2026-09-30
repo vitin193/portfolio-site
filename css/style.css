@@ -848,15 +848,46 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   .section-hero { padding-bottom: 72px; }
   .section-projects { padding-bottom: 56px; }
   .case-card { padding: 16px 24px 16px 0; }
-  .case-card__inner { flex-direction: column; padding: 32px; gap: 24px; }
-  .case-card__view { position: static; margin-top: 16px; }
-  /* em coluna, "flex: 1 1 0" vira altura zero e o texto vazava para fora do card */
-  .case-card__content { flex: 0 0 auto; min-height: 0; }
-  .case-card__heading { max-width: none; }
-  /* tags: espaço também entre as linhas quando quebram */
-  .case-card__tags { gap: 12px 12px; }
-  /* "ver +" no canto inferior direito do card */
-  .case-card__view { order: 3; align-self: flex-end; margin-top: 20px; }
+  /* Card em grade: logo 20% menor (187 → 150px) à esquerda e o título ao
+     lado, com o mesmo vão de 24px; tags e "ver +" embaixo, na largura toda
+     (tags não quebram linha e não caberiam na coluna ao lado do logo).
+     .case-card__brand/__content viram "contents" para os filhos entrarem
+     direto na grade. */
+  .case-card__inner {
+    display: grid;
+    /* 150px a partir de ~390px; em telas mais estreitas o logo encolhe para o
+       título manter ~128px e não partir palavras no meio */
+    grid-template-columns: clamp(80px, 100vw - 240px, 150px) minmax(0, 1fr);
+    gap: 0 24px; /* sem o gap de 48px do desktop entre as linhas */
+    padding: 32px;
+    min-height: 0;
+  }
+  .case-card__brand, .case-card__content { display: contents; }
+  .case-card__client { grid-column: 1 / -1; grid-row: 1; margin-bottom: 12px; }
+  .case-card__icon {
+    grid-column: 1; grid-row: 2;
+    width: 100%; height: auto; aspect-ratio: 1;
+    border-radius: 19px; /* 24 × 0,8 */
+  }
+  .case-card__heading {
+    grid-column: 2; grid-row: 2;
+    align-self: center;
+    max-width: none;
+    font-size: clamp(16px, 4.6vw, 24px);
+    line-height: 1.25;
+    overflow-wrap: break-word; /* rede de segurança em telas bem estreitas */
+  }
+  /* tags e "ver +" 20% menores, acompanhando o logo */
+  .case-card__tags { grid-column: 1 / -1; grid-row: 3; gap: 10px; margin-top: 24px; }
+  .case-card .tag { font-size: 11px; padding: 6px 20px; }
+  .case-card__view {
+    grid-column: 1 / -1; grid-row: 4;
+    position: static;
+    justify-self: end;
+    margin-top: 16px;
+    font-size: 26px;
+  }
+  .case-card__view .plus { letter-spacing: -4px; }
   .resume-item { flex-direction: column; gap: 12px; }
   /* idem: as bases de 251px/150px viravam altura e abriam vãos entre os itens */
   .resume-item > .resume-item__who,
