@@ -877,27 +877,35 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
     line-height: 1.25;
     overflow-wrap: break-word; /* rede de segurança em telas bem estreitas */
   }
-  /* tags e "ver +" 20% menores, acompanhando o logo. O "ver +" é o último
-     item da fileira de tags: vai para a direita da última linha e, se não
-     couber ao lado dela, quebra sozinho para uma linha própria. */
-  .case-card__tags { grid-column: 1 / -1; grid-row: 3; gap: 10px; margin-top: 40px; }
-  .case-card .tag { font-size: 11px; padding: 6px 20px; }
+  /* tags e "ver +" 20% menores, acompanhando o logo. Uma tag por linha na
+     1ª coluna; o "ver +" fica na 2ª, na linha da última tag (as regras com
+     :has escolhem a linha conforme o número de tags), com a linha de base do
+     texto alinhada à do texto da tag. */
+  .case-card__tags {
+    grid-column: 1 / -1; grid-row: 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    justify-items: start;
+    align-items: baseline;
+    margin-top: 40px;
+  }
+  .case-card .tag { grid-column: 1; font-size: 11px; padding: 6px 20px; }
   .case-card__view {
+    grid-column: 2; grid-row: 1;
     position: static;
-    margin-left: auto;
-    height: 29px; /* mesma altura da tag, centralizado nela */
-    align-items: center;
     line-height: 1;
     font-size: 26px;
   }
+  .case-card__tags:has(> .tag:nth-child(2)) .case-card__view { grid-row: 2; }
+  .case-card__tags:has(> .tag:nth-child(3)) .case-card__view { grid-row: 3; }
+  .case-card__tags:has(> .tag:nth-child(4)) .case-card__view { grid-row: 4; }
   .case-card__view .plus { letter-spacing: -4px; }
-  /* Claro: uma tag por linha — um item invisível de largura total entre as
-     duas força a quebra (::after, reposicionado com order); sem vão de linha
-     extra, o respiro vem da margem */
-  .case-card--claro .case-card__tags { row-gap: 0; }
-  .case-card--claro .case-card__tags::after { content: ""; flex-basis: 100%; order: 1; }
-  .case-card--claro .tag ~ .tag,
-  .case-card--claro .case-card__view { order: 2; margin-top: 10px; }
+  /* telas bem estreitas: as tags mais longas não cabem ao lado do "ver +" —
+     ele desce para uma linha própria, no canto direito */
+  @media (max-width: 359px) {
+    .case-card__tags:has(> .tag:nth-child(1)) .case-card__view { grid-column: 1 / -1; grid-row: auto; justify-self: end; margin-top: 6px; }
+  }
   .resume-item { flex-direction: column; gap: 12px; }
   /* idem: as bases de 251px/150px viravam altura e abriam vãos entre os itens */
   .resume-item > .resume-item__who,
