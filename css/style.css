@@ -845,6 +845,15 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
    espremiam a descrição em ~180px. A data desce para baixo do nome/cargo
    e a descrição fica com o resto da largura. */
 @media (min-width: 901px) and (max-width: 1200px) {
+  /* Cards de case: logo 20% menor (187 → 150px), vão menor e menos sobra à
+     direita, para a coluna do título/tags ganhar ~115px. O recuo à esquerda
+     não muda, para continuar alinhado com a hero. */
+  .case-card { padding-right: 40px; }
+  .case-card__inner { gap: 40px; padding-right: 64px; min-height: 0; }
+  .case-card__icon { width: 150px; height: 150px; border-radius: 19px; }
+  .case-card__content { min-height: 190px; }
+  .case-card__view { right: -40px; }
+  .case-card__tags { padding-right: 48px; } /* a última tag não encosta no "ver +" */
   .resume-item {
     display: grid;
     grid-template-columns: 220px minmax(0, 1fr);
