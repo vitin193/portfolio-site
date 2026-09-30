@@ -841,6 +841,21 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
 /* ===================================================================
    Responsive
    =================================================================== */
+/* Tablet: as 3 colunas do currículo (251px + 150px fixos + vãos de 80px)
+   espremiam a descrição em ~180px. A data desce para baixo do nome/cargo
+   e a descrição fica com o resto da largura. */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .resume-item {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    gap: 12px 48px;
+  }
+  .resume-item__who { grid-column: 1; grid-row: 1; }
+  .resume-item__date { grid-column: 1; grid-row: 2; text-align: left; }
+  .resume-item__desc { grid-column: 2; grid-row: 1 / span 2; max-width: none; text-align: left; } /* justificado abre "rios" na coluna mais estreita */
+}
+
 @media (max-width: 900px) {
   :root { --gutter: 32px; }
   .nav { gap: 20px; flex-wrap: wrap; }
