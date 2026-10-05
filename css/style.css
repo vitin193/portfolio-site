@@ -295,6 +295,14 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
     opacity: 1;
     pointer-events: auto;
     transform: none;
+    transition: none;
+  }
+  /* Os estados hover/foco/aberto do desktop têm especificidade maior e
+     reaplicavam o translate(-50%), empurrando a lista pra fora da tela */
+  .js-nav .nav__item--dropdown:hover .nav__dropdown,
+  .js-nav .nav__item--dropdown:focus-within .nav__dropdown,
+  .js-nav .nav__item--dropdown.is-open .nav__dropdown {
+    transform: none;
   }
   .js-nav .nav__dropdown ul {
     background: none;
