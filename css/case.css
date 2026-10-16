@@ -1005,3 +1005,103 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
 @media (prefers-reduced-motion: reduce) {
   .case-phone-row { scroll-behavior: auto; }
 }
+
+/* ===================================================================
+   "Outros cases": botão no fim do case; no hover (ou clique/toque)
+   os ícones dos outros dois cases sobem de trás do botão.
+   =================================================================== */
+.case-next {
+  --case-next-fg: currentColor;
+  position: relative;
+  align-self: center;
+  margin-top: 190px;
+}
+.case-next__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-body);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color .25s ease, color .25s ease;
+}
+.case-next__arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform .35s cubic-bezier(.16,.8,.3,1);
+}
+.case-next__trigger:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+
+.case-next__list {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+  width: max-content; /* sem isso a lista herda a largura do botão e espreme os ícones */
+  margin: 0;
+  padding: 0 0 22px; /* ponte entre os ícones e o botão: o hover não cai no vão */
+  list-style: none;
+  transform: translateX(-50%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear .45s;
+}
+.case-next__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(70px) scale(.6);
+  transition: opacity .3s ease, transform .45s cubic-bezier(.16,.8,.3,1);
+}
+.case-next__item img {
+  display: block;
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,.3));
+  transition: transform .3s cubic-bezier(.16,.8,.3,1);
+}
+.case-next__item:hover img,
+.case-next__item:focus-visible img { transform: translateY(-6px) scale(1.06); }
+.case-next__item:focus-visible { outline: none; }
+.case-next__item:focus-visible span { text-decoration: underline; text-underline-offset: 4px; }
+
+/* Aberto: hover (só em dispositivos com mouse) ou clique/teclado (.is-open, via case-motion.js) */
+@media (hover: hover) {
+  .case-next:hover .case-next__list { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+  .case-next:hover .case-next__item { opacity: 1; transform: none; }
+  .case-next:hover .case-next__trigger { background: var(--case-next-fg); color: var(--section-bg); border-color: var(--case-next-fg); }
+  .case-next:hover .case-next__arrow { transform: rotate(180deg); }
+}
+.case-next.is-open .case-next__list { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+.case-next.is-open .case-next__item { opacity: 1; transform: none; }
+.case-next.is-open .case-next__arrow { transform: rotate(180deg); }
+.case-section--black .case-next,
+.case-section--red-deep .case-next { --case-next-fg: var(--case-cream); }
+.case-section--vw-midnight .case-next { --case-next-fg: var(--vw-light); }
+.case-next__list li:nth-child(2) .case-next__item { transition-delay: .07s; }
+
+@media (max-width: 1200px) {
+  .case-next { margin-top: 160px; }
+  .case-next__list { gap: 24px; }
+  .case-next__item img { width: 88px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-next__item { transform: none; transition: opacity .2s ease; }
+  .case-next__item img, .case-next__arrow { transition: none; }
+  .case-next__item:hover img, .case-next__item:focus-visible img { transform: none; }
+}

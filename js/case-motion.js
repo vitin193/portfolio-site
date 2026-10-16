@@ -327,3 +327,22 @@
     carousel.addEventListener('dragstart', (e) => e.preventDefault());
   });
 })();
+
+// --- "Outros cases": clique/toque abre e fecha os ícones (no desktop o hover já abre via CSS) ---
+(() => {
+  document.querySelectorAll('.case-next').forEach((nav) => {
+    const trigger = nav.querySelector('.case-next__trigger');
+    if (!trigger) return;
+    const setOpen = (open) => {
+      nav.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+    };
+    trigger.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+    document.addEventListener('click', (e) => { if (!nav.contains(e.target)) setOpen(false); });
+    nav.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { setOpen(false); trigger.focus(); }
+    });
+    // Teclado: ao sair do bloco com Tab, fecha
+    nav.addEventListener('focusout', (e) => { if (!nav.contains(e.relatedTarget)) setOpen(false); });
+  });
+})();
