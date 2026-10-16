@@ -1010,11 +1010,15 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
    "Outros cases": botão no fim do case; no hover (ou clique/toque)
    os ícones dos outros dois cases sobem de trás do botão.
    =================================================================== */
+/* Bloco preto próprio, separado do aviso de NDA; o padding de cima é o espaço
+   para onde os ícones sobem. */
+.case-others { padding: 210px var(--gutter) 90px; }
+.case-others .case-section__inner { display: flex; justify-content: center; }
+.case-section--black + .case-others { border-top: 1px solid rgba(242, 242, 241, .12); } /* Peterson: NDA também é preto */
+
 .case-next {
-  --case-next-fg: currentColor;
+  --case-next-fg: var(--case-cream);
   position: relative;
-  align-self: center;
-  margin-top: 190px;
 }
 .case-next__trigger {
   display: inline-flex;
@@ -1089,13 +1093,10 @@ a.case-project-card:hover .case-project-card__arrow { transform: translate(3px, 
 .case-next.is-open .case-next__list { visibility: visible; pointer-events: auto; transition-delay: 0s; }
 .case-next.is-open .case-next__item { opacity: 1; transform: none; }
 .case-next.is-open .case-next__arrow { transform: rotate(180deg); }
-.case-section--black .case-next,
-.case-section--red-deep .case-next { --case-next-fg: var(--case-cream); }
-.case-section--vw-midnight .case-next { --case-next-fg: var(--vw-light); }
 .case-next__list li:nth-child(2) .case-next__item { transition-delay: .07s; }
 
 @media (max-width: 1200px) {
-  .case-next { margin-top: 160px; }
+  .case-others { padding: 170px var(--gutter) 70px; }
   .case-next__list { gap: 24px; }
   .case-next__item img { width: 88px; }
 }
